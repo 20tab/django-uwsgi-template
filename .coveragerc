@@ -1,0 +1,12 @@
+[run]
+branch = True
+source = .
+
+omit =  **/__init__.py
+        **/migrations/**
+        **/tests/**
+        **/settings/*.py
+        **/wsgi.py
+        **/urls.py
+        manage.py
+        tasks.py
