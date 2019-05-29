@@ -4,7 +4,10 @@ from {{project_name}}.settings.base import *  # noqa
 from {{project_name}}.settings.secret import *  # noqa
 
 
-ALLOWED_HOSTS = (BASE_HOST_URL,)  # noqa
+# Security
+# https://docs.djangoproject.com/en/2.2/topics/security/#host-header-validation
+
+ALLOWED_HOSTS = (BASE_URL,)  # noqa
 
 
 # Database
