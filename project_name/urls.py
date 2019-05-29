@@ -25,7 +25,7 @@ urlpatterns = [
 
 try:
     import debug_toolbar
-except ModuleNotFoundError:
+except ModuleNotFoundError:  # pragma: no cover
     pass
 else:
-    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))
+    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))  # pragma: no cover

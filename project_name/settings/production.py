@@ -3,9 +3,15 @@
 from {{project_name}}.settings.base import *  # noqa
 from {{project_name}}.settings.secret import *  # noqa
 
-HOST = BASE_HOST_URL  # noqa
 
-ALLOWED_HOSTS = (HOST,)
+# Site
+
+ALLOWED_HOSTS = (BASE_URL,)  # noqa
+
+
+# Debug
+
+DEBUG = False
 
 
 # Database
@@ -29,13 +35,6 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = EMAIL_HOST or ''  # noqa
-
-
-# Debug
-
-DEBUG = False
-
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa
 
 
 # Deployment

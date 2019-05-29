@@ -141,6 +141,7 @@ dmypy.json
 .DS_Store
 
 # Django
+/static/
 media/
 *secret.py
 
@@ -166,3 +167,6 @@ deploy/hosts
 
 # Others
 *.bak
+{% comment %}
+requirements/*.txt
+{% endcomment %}

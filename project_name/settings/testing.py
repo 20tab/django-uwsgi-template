@@ -3,9 +3,8 @@
 from {{project_name}}.settings.base import *  # noqa
 from {{project_name}}.settings.secret import *  # noqa
 
-HOST = BASE_HOST_URL  # noqa
 
-ALLOWED_HOSTS = (HOST,)
+ALLOWED_HOSTS = (BASE_HOST_URL,)  # noqa
 
 
 # Database
@@ -34,3 +33,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 DEBUG = False
 
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa
+
+
+# Django REST Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+
+REST_FRAMEWORK = {}
