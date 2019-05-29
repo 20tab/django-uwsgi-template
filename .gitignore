@@ -167,3 +167,6 @@ deploy/hosts
 
 # Others
 *.bak
+{% comment %}
+requirements/*.txt
+{% endcomment %}
