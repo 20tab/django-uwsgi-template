@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/
 
 import os
 
+from django.utils.translation import gettext_lazy as _
+￼
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -133,7 +137,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'media'))
 
 
-# Sites
+# Site
 
 DEFAULT_NAME = '{{project_name}}'
 
@@ -141,7 +145,7 @@ BASE_HOST_URL = '{{project_name}}.com'
 
 BASE_URL = f'www.{BASE_HOST_URL}'
 
-BASE_DOMAIN_URL = f'http://{BASE_URL}'
+BASE_DOMAIN_URL = f'https://{BASE_URL}'
 
 
 # Email Settings
@@ -168,8 +172,8 @@ ADMINS = MANAGERS
 # https://docs.djangoproject.com/en/{{docs_version}}/topics/i18n/translation/
 
 # LANGUAGES = (
-#     ('en', 'English'),
-#     ('it', 'Italiano'),
+#     ('en', _('English')),
+#     ('it', _('Italiano')),
 # )
 
 # LOCALE_PATHS = (os.path.abspath(os.path.join(BASE_DIR, 'locale')),)
@@ -195,11 +199,3 @@ ADMINS = MANAGERS
 # https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {}
-
-
-# Django CORS Headers
-# https://github.com/ottoyiu/django-cors-headers/
-
-# CORS_ORIGIN_WHITELIST = (BASE_HOST_URL,)
-
-CORS_ORIGIN_ALLOW_ALL = True

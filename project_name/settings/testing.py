@@ -3,9 +3,8 @@
 from {{project_name}}.settings.base import *  # noqa
 from {{project_name}}.settings.secret import *  # noqa
 
-HOST = BASE_HOST_URL  # noqa
 
-ALLOWED_HOSTS = (HOST,)
+ALLOWED_HOSTS = (BASE_HOST_URL,)  # noqa
 
 
 # Database

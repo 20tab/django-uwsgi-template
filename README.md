@@ -178,9 +178,9 @@ To run the full test suite, with coverage calculation, execute:
 
 > **NOTE**:  check [django-bdd-toolkit](https://github.com/20tab/django-bdd-toolkit) for instructions on how to write BDD tests
 
-## Frontend build
+## Static
 
-In order to install `node` dependencies, compile the frontend code and collect static files, execute:
+To collect static files, execute:
 
 ```shell
 ({{project_name}}) $ make collectstatic

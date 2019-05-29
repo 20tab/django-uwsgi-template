@@ -3,9 +3,19 @@
 from {{project_name}}.settings.base import *  # noqa
 from {{project_name}}.settings.secret import *  # noqa
 
-HOST = f'alpha.{BASE_HOST_URL}'  # noqa
 
-ALLOWED_HOSTS = (HOST,)
+# Site
+
+BASE_URL = f'alpha.{BASE_HOST_URL}'  # noqa
+
+BASE_DOMAIN_URL = f'http://{BASE_URL}'
+
+ALLOWED_HOSTS = (BASE_URL,)
+
+
+# Debug
+
+DEBUG = True
 
 
 # Database
@@ -31,8 +41,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = EMAIL_HOST or ''  # noqa
 
 
-# Debug
+# Django CORS Headers
+# https://github.com/ottoyiu/django-cors-headers/
 
-DEBUG = True
-
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa
+CORS_ORIGIN_WHITELIST = [BASE_DOMAIN_URL]
