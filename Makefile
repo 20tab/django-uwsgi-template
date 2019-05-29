@@ -12,9 +12,7 @@ ci:
 		pip install -U pip; \
 		pip install -U -r requirements/tests.txt; \
 		flake8; \
-		COVERAGE_FILE=.coverage.test coverage run manage.py test --settings=${SETTINGS} --noinput --parallel; \
-		COVERAGE_FILE=.coverage.behave coverage run manage.py behave --settings=${SETTINGS}; \
-		coverage combine; \
+		coverage run manage.py test --settings=${SETTINGS} --noinput; \
 		coverage xml; \
 	)
 
@@ -50,9 +48,7 @@ production:
 
 test:
 	( \
-		COVERAGE_FILE=.coverage.test coverage run manage.py test --settings=${SETTINGS} --noinput --keepdb; \
-		COVERAGE_FILE=.coverage.behave coverage run manage.py behave --settings=${SETTINGS} --keepdb; \
-		coverage combine; \
+		coverage run manage.py test --settings=${SETTINGS} --noinput; \
 		coverage html; \
 	)
 

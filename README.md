@@ -170,21 +170,13 @@ To install the just updated requirements (e.g. `requirements/dev.txt`), execute:
 
 ## Testing
 
-To run the full test suite (including `behave` tests), with coverage calculation, execute:
+To run the full test suite, with coverage calculation, execute:
 
 ```shell
 ({{project_name}}) $ make test
 ```
 
 > **NOTE**:  check [django-bdd-toolkit](https://github.com/20tab/django-bdd-toolkit) for instructions on how to write BDD tests
-
-## Frontend build
-
-In order to install `node` dependencies and compile the frontend code, execute:
-
-```shell
-({{project_name}}) $ make npm
-```
 
 ## Continuous Integration
 
