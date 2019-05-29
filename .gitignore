@@ -141,6 +141,7 @@ dmypy.json
 .DS_Store
 
 # Django
+/static/
 media/
 *secret.py
 

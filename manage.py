@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    """Django main function."""
+    """Run Django process."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', '{{project_name}}.settings')
     try:
         from django.core.management import execute_from_command_line

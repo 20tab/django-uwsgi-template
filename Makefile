@@ -11,6 +11,11 @@ ci:
 		source ${JENKINSBUILD_DIR}/{{project_name}}/bin/activate; \
 		pip install -U pip; \
 		pip install -U -r requirements/tests.txt; \
+		cd ./web/client; \
+		npm install; \
+		npm run build; \
+		cd ../../; \
+		python manage.py collectstatic --clear --noinput; \
 		flake8; \
 		coverage run manage.py test --settings=${SETTINGS} --noinput; \
 		coverage xml; \
@@ -67,3 +72,12 @@ pip:
 		pip-compile $(p) requirements/prod.ini > requirements/prod.txt; \
 		pip-compile $(p) requirements/tests.ini > requirements/tests.txt; \
 	)\
+
+collectstatic:
+	( \
+		cd ./web/client; \
+		npm install; \
+		npm run build; \
+		cd ../../; \
+		python manage.py collectstatic --clear --noinput; \
+	)

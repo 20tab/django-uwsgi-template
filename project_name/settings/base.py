@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
 ]
 
@@ -120,9 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = None  # NOTE: to use only with collectstatic workflow
+STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static'))
 
-STATICFILES_DIRS = (os.path.abspath(os.path.join(BASE_DIR, 'static')),)
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Stored files
 # https://docs.djangoproject.com/en/{{docs_version}}/topics/files/
@@ -188,3 +189,17 @@ ADMINS = MANAGERS
 # LOGIN_REDIRECT_URL = 'home'
 
 # LOGOUT_REDIRECT_URL = 'home'
+
+
+# Django REST Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+
+REST_FRAMEWORK = {}
+
+
+# Django CORS Headers
+# https://github.com/ottoyiu/django-cors-headers/
+
+# CORS_ORIGIN_WHITELIST = (BASE_HOST_URL,)
+
+CORS_ORIGIN_ALLOW_ALL = True

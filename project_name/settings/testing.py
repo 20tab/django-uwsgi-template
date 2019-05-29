@@ -34,3 +34,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 DEBUG = False
 
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa
+
+
+# Django REST Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+
+REST_FRAMEWORK = {}

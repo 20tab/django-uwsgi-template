@@ -7,6 +7,5 @@ omit =  **/__init__.py
         **/tests/**
         **/settings/*.py
         **/wsgi.py
-        **/urls.py
         manage.py
         tasks.py
