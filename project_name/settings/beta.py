@@ -39,9 +39,3 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = EMAIL_HOST or ''  # noqa
-
-
-# Django CORS Headers
-# https://github.com/ottoyiu/django-cors-headers/
-
-CORS_ORIGIN_WHITELIST = [BASE_DOMAIN_URL]
