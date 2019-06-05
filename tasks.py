@@ -1,12 +1,12 @@
 """Define invoke tasks."""
 
-import configparser
 import getpass
 import os
-import pathlib
 import sys
+from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
 from invoke import task
 
 BASE_DIR = os.path.dirname(__file__)
@@ -15,7 +15,7 @@ PROJECT_DIRNAME = os.path.basename(os.path.dirname(__file__))
 EMPEROR_MODE = True
 VASSALS = f'{BASE_DIRNAME}/vassals'
 USERNAME = os.getlogin()
-SECRET_FILE = f'{BASE_DIR}/{PROJECT_DIRNAME}/settings/secret.py'
+ENV_FILE = f'{BASE_DIR}/.env'
 SECRET_KEY = get_random_secret_key()
 
 
@@ -23,8 +23,8 @@ SECRET_KEY = get_random_secret_key()
 def init(c):
     """Initialize project."""
     try:
-        VENV_ROOT = str(pathlib.Path(os.environ['VIRTUAL_ENV']).parent).replace("/", "\/")  # noqa
-    except KeyError:
+        VENV_ROOT = str(Path(os.getenv('VIRTUAL_ENV')).parent).replace("/", "\/")  # noqa
+    except TypeError:
         print('Activate your virtualenv and run the inv command again')
         return
     EMPEROR_MODE = confirm('Do you want to configure your uWSGI vassal in emperor mode? (no=stand-alone)')
@@ -68,18 +68,14 @@ def init(c):
     c.run(f'sed -i".bak" -e "s/WORKAREA_ROOT/{WORKAREA_ROOT}/g;" {ini_dir}/{USERNAME}.ini')
     c.run(f'sed -i".bak" -e "s/PYVERSION/{PYVERSION}/g;" {ini_dir}/{USERNAME}.ini')
     c.run(f'sed -i".bak" -e "s/VENV_ROOT/{VENV_ROOT}/g;" {ini_dir}/{USERNAME}.ini')
-    print('Installing secret file in settings')
-    if not os.path.exists(f'{SECRET_FILE}'):
-        c.run(f'cp {SECRET_FILE}.template {SECRET_FILE}')
-        c.run((
-            f'sed -i".bak" -e '
-            f'"s/database/{database}/g;s/password/{password}/g;s/secretkey/{SECRET_KEY}/g;s/username/{username}/g"'
-            f' {SECRET_FILE}'
-        ))
-    else:
-        c.run(
-            f'sed -i".bak" -e "s/database/{database}/g;s/password/{password}/g;s/username/{username}/g" {SECRET_FILE}'
-        )
+    print('Create env file')
+    if not os.path.exists(f'{ENV_FILE}'):
+        c.run(f'cp {ENV_FILE}.template {ENV_FILE}')
+    c.run((
+        f'sed -i".bak" -e '
+        f'"s/database/{database}/g;s/password/{password}/g;s/secretkey/{SECRET_KEY}/g;s/username/{username}/g"'
+        f' {ENV_FILE}'
+    ))
     createdb(c)
     print('*** Next steps ***')
     print(f'a) Check the uwsgiconf/local/{USERNAME}.ini and verify that you have the correct python plugin')
@@ -129,14 +125,11 @@ def restart(c):
 
 def get_db():
     """Fetch database credentials."""
-    with open(SECRET_FILE, 'r') as f:
-        config_string = '[secret]\n' + f.read()
-    config = configparser.ConfigParser()
-    config.read_string(config_string)
-    db_name = config.get('secret', 'DATABASES_DEFAULT_NAME')
-    db_host = config.get('secret', 'DATABASES_DEFAULT_HOST')
-    db_port = config.get('secret', 'DATABASES_DEFAULT_PORT')
-    db_user = config.get('secret', 'DATABASES_DEFAULT_USER')
+    load_dotenv(dotenv_path=Path('.') / '.env')
+    db_name = os.getenv('DATABASES_DEFAULT_NAME')
+    db_host = os.getenv('DATABASES_DEFAULT_HOST')
+    db_port = os.getenv('DATABASES_DEFAULT_PORT')
+    db_user = os.getenv('DATABASES_DEFAULT_USER')
     return db_name, db_host, db_port, db_user
 
 
