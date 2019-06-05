@@ -143,7 +143,6 @@ dmypy.json
 # Django
 /static/
 media/
-*secret.py
 
 # uWSGI
 *.log.*

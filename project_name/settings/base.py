@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/
 
 import os
 
-from django.utils.translation import gettext_lazy as _
-￼
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -23,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/{{docs_version}}/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'secretkey-to-change-in-secret-py'
+SECRET_KEY = os.getenv('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,7 +44,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -157,8 +153,6 @@ DEFAULT_FROM_EMAIL = f'{DEFAULT_NAME} <{SERVER_EMAIL}>'
 
 EMAIL_SUBJECT_PREFIX = f'[{DEFAULT_NAME}] '
 
-EMAIL_USE_LOCALTIME = True
-
 ERROR_EMAIL = f'errors@{BASE_HOST_URL}'
 
 EMAIL_SIGNATURE = f'\n-- \n{DEFAULT_FROM_EMAIL}'
@@ -166,6 +160,22 @@ EMAIL_SIGNATURE = f'\n-- \n{DEFAULT_FROM_EMAIL}'
 MANAGERS = ((DEFAULT_NAME, ERROR_EMAIL),)
 
 ADMINS = MANAGERS
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
+
+EMAIL_PORT = os.getenv('EMAIL_PORT', 25)
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', False)
+
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_SSL', False)
+
+EMAIL_USE_LOCALTIME = True
 
 
 # Translation
