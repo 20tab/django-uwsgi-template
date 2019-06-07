@@ -6,7 +6,7 @@ from {{project_name}}.settings.base import *  # noqa
 
 
 # Security
-# https://docs.djangoproject.com/en/2.2/topics/security/#host-header-validation
+# https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
 BASE_URL = '{{project_name}}.local'
 
@@ -16,6 +16,7 @@ ALLOWED_HOSTS = (BASE_URL, '127.0.0.1', 'localhost')
 
 
 # Debug
+# https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
 DEBUG = True
 
@@ -41,7 +42,8 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-# Debug Toolbar
+# Django Debug Toolbar
+# https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html
 
 try:
     import debug_toolbar  # noqa

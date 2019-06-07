@@ -6,7 +6,7 @@ from {{project_name}}.settings.base import *  # noqa
 
 
 # Security
-# https://docs.djangoproject.com/en/2.2/topics/security/#host-header-validation
+# https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
 BASE_URL = f'beta.{BASE_HOST_URL}'  # noqa
 
@@ -16,6 +16,7 @@ ALLOWED_HOSTS = (BASE_URL,)
 
 
 # Debug
+# https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
 DEBUG = False
 
