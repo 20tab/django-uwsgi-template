@@ -191,9 +191,9 @@ To collect static files, execute:
 Use the following command as a shortcut to configure a continuous integration (e.g. Jenkins) build:
 
 ```shell
-export DATABASES_DEFAULT_NAME=<database_name>
-export DATABASES_DEFAULT_PASSWORD=<database_user_password>
-export DATABASES_DEFAULT_USER=<database_user_name>
+export DATABASE_DEFAULT_NAME=<database_name>
+export DATABASE_DEFAULT_PASSWORD=<database_user_password>
+export DATABASE_DEFAULT_USER=<database_user_name>
 export SECRETKEY=<django_secret_key>
 make ci
 ```
