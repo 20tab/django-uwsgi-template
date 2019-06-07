@@ -145,7 +145,7 @@ dmypy.json
 media/
 
 # uWSGI
-*.log.*
+*.log*
 spooler/
 
 # Prettier
