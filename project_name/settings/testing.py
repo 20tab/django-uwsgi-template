@@ -6,12 +6,13 @@ from {{project_name}}.settings.base import *  # noqa
 
 
 # Security
-# https://docs.djangoproject.com/en/2.2/topics/security/#host-header-validation
+# https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
 ALLOWED_HOSTS = (BASE_URL,)  # noqa
 
 
 # Debug
+# https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
 DEBUG = False
 

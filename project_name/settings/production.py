@@ -6,12 +6,13 @@ from {{project_name}}.settings.base import *  # noqa
 
 
 # Security
-# https://docs.djangoproject.com/en/2.2/topics/security/#host-header-validation
+# https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
 ALLOWED_HOSTS = (BASE_URL,)  # noqa
 
 
 # Debug
+# https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
 DEBUG = False
 
@@ -45,5 +46,15 @@ X_FRAME_OPTIONS = 'DENY'  # Default: 'SAMEORIGIN'
 # SECURE_SSL_REDIRECT = True
 
 # SESSION_COOKIE_SECURE = True
+
+# SECURE_HSTS_SECONDS = 3600
+
+# SECURE_HSTS_PRELOAD = True
+
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# SECURE_BROWSER_XSS_FILTER = True
 
 # CONN_MAX_AGE = None
