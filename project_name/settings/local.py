@@ -41,12 +41,6 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-# Django CORS Headers
-# https://github.com/ottoyiu/django-cors-headers/
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-
 # Debug Toolbar
 
 try:
