@@ -26,10 +26,10 @@ DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_DEFAULT_NAME', '{{project_name}}_alpha'),
-        'USER': os.getenv('DATABASE_DEFAULT_USER', '{{project_name}}'),
-        'PASSWORD': os.getenv('DATABASE_DEFAULT_PASSWORD', ''),
-        'HOST': os.getenv('DATABASE_DEFAULT_HOST', '127.0.0.1'),
-        'PORT': os.getenv('DATABASE_DEFAULT_PORT', '5432'),
+        'NAME': os.getenv('DATABASES_DEFAULT_NAME', '{{project_name}}_alpha'),
+        'USER': os.getenv('DATABASES_DEFAULT_USER', '{{project_name}}'),
+        'PASSWORD': os.getenv('DATABASES_DEFAULT_PASSWORD', ''),
+        'HOST': os.getenv('DATABASES_DEFAULT_HOST', '127.0.0.1'),
+        'PORT': os.getenv('DATABASES_DEFAULT_PORT', '5432'),
     }
 }
