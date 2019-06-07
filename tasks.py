@@ -126,10 +126,10 @@ def restart(c):
 def get_db():
     """Fetch database credentials."""
     load_dotenv(dotenv_path=Path('.') / '.env')
-    db_name = os.getenv('DATABASES_DEFAULT_NAME')
-    db_host = os.getenv('DATABASES_DEFAULT_HOST')
-    db_port = os.getenv('DATABASES_DEFAULT_PORT')
-    db_user = os.getenv('DATABASES_DEFAULT_USER')
+    db_name = os.getenv('DATABASE_DEFAULT_NAME')
+    db_host = os.getenv('DATABASE_DEFAULT_HOST')
+    db_port = os.getenv('DATABASE_DEFAULT_PORT')
+    db_user = os.getenv('DATABASE_DEFAULT_USER')
     return db_name, db_host, db_port, db_user
 
 
