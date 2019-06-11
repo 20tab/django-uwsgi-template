@@ -4,7 +4,6 @@ import os
 
 from {{project_name}}.settings.base import *  # noqa
 
-
 # Security
 # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
@@ -34,3 +33,8 @@ DATABASES = {
         'PORT': os.getenv('DATABASE_DEFAULT_PORT', '5432'),
     }
 }
+
+# Email Settings
+# https://docs.djangoproject.com/en/{{docs_version}}/topics/email/
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

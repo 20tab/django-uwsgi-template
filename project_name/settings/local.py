@@ -4,7 +4,6 @@ import os
 
 from {{project_name}}.settings.base import *  # noqa
 
-
 # Security
 # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
