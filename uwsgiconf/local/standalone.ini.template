@@ -9,6 +9,11 @@ workarea_root = WORKAREA_ROOT
 project_root = %(workarea_root)/%(project_name)
 venvs_dir = VENV_ROOT
 
+# Set environment variables
+for-readline = WORKAREA_ROOT/{{project_name}}/.env
+  env = %(_)
+endfor =
+
 ini = %d/global.ini
 ini = %d/static.ini
 

@@ -34,6 +34,7 @@ DATABASES = {
     }
 }
 
+
 # Email Settings
 # https://docs.djangoproject.com/en/{{docs_version}}/topics/email/
 
