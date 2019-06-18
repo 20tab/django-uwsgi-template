@@ -1,0 +1,23 @@
+image: python:latest
+
+services:
+  - postgres:latest
+
+cache:
+  paths:
+    - ~/.cache/pip/
+
+before_script:
+  - pip install -r requirements/tests.txt
+
+test:
+  variables:
+    DATABASE_DEFAULT_HOST: "postgres"
+    DATABASE_DEFAULT_NAME: "{{project_name}}"
+    DATABASE_DEFAULT_PASSWORD: "postgres"
+    DATABASE_DEFAULT_PORT: 5432
+    DATABASE_DEFAULT_USER: "postgres"
+    SECRET_KEY: "{{secret_key}}"
+  script:
+    - make gitlabci
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
