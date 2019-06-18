@@ -82,7 +82,7 @@ def init(c):
     print('b) Check the uwsgiconf/remote/globlal.ini file and verify that you have the correct python plugin')
     print('c) Check the uwsgiconf/remote/alpha.ini file and make sure the domain name is correct')
     print('d) Configure the deploy/hosts file with server data')
-    print('e) Configure the deploy/alpha.yaml file with the correct data')
+    print('e) Configure the deploy/alpha.yml file with the correct data')
     print(f'f) Configure the file by {PROJECT_DIRNAME}/settings/testing.py with the correct data')
     if EMPEROR_MODE:
         c.run(f"python -m webbrowser -t http://{PROJECT_DIRNAME}.local/")
