@@ -3,7 +3,7 @@
   hosts: servers
   gather_facts: False
   vars_files:
-      - ${TARGET}.yaml
+      - ${TARGET}.yml
 
   tasks:
     - name: Force virtualenv creation

@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 from invoke import task
 
 BASE_DIR = os.path.dirname(__file__)
@@ -82,7 +82,7 @@ def init(c):
     print('b) Check the uwsgiconf/remote/globlal.ini file and verify that you have the correct python plugin')
     print('c) Check the uwsgiconf/remote/alpha.ini file and make sure the domain name is correct')
     print('d) Configure the deploy/hosts file with server data')
-    print('e) Configure the deploy/alpha.yaml file with the correct data')
+    print('e) Configure the deploy/alpha.yml file with the correct data')
     print(f'f) Configure the file by {PROJECT_DIRNAME}/settings/testing.py with the correct data')
     if EMPEROR_MODE:
         c.run(f"python -m webbrowser -t http://{PROJECT_DIRNAME}.local/")
@@ -125,7 +125,7 @@ def restart(c):
 
 def get_db():
     """Fetch database credentials."""
-    load_dotenv(dotenv_path=Path('.') / '.env')
+    load_dotenv(find_dotenv())
     db_name = os.getenv('DATABASE_DEFAULT_NAME')
     db_host = os.getenv('DATABASE_DEFAULT_HOST')
     db_port = os.getenv('DATABASE_DEFAULT_PORT')

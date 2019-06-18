@@ -158,10 +158,10 @@ node_modules/
 .sass-cache
 
 # Deploy
-deploy/alpha.yaml
-deploy/beta.yaml
+deploy/alpha.[yml,yaml]
+deploy/beta.[yml,yaml]
 deploy/deploy.retry
-deploy/production.yaml
+deploy/production.[yml,yaml]
 deploy/hosts
 
 # Others

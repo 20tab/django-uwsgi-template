@@ -68,7 +68,7 @@ Change directory and start a new project with this template:
 
 ```shell
 ({{project_name}}) $ cd ~/projects/
-({{project_name}}) $ django-admin.py startproject --template https://www.20tab.com/template/ -e cfg,ini,json,md,py,yaml,template -n Makefile,.gitignore {{project_name}}
+({{project_name}}) $ django-admin.py startproject --template https://www.20tab.com/template/ -e cfg,ini,json,md,py,yml,template -n Makefile,.gitignore {{project_name}}
 ```
 
 ### Git initialization
@@ -200,13 +200,13 @@ make ci
 
 ## Deploy
 
-The project is partially configured to use Ansible to deploy the project. For each instance to deploy (e.g. "alpha"), there must be a config file (e.g. `deploy/alpha.yaml`) and an item in the hosts file.
+The project is partially configured to use Ansible to deploy the project. For each instance to deploy (e.g. "alpha"), there must be a config file (e.g. `deploy/alpha.yml`) and an item in the hosts file.
 
-Use provided `deploy/alpha.yaml.template` and `deploy/hosts.template` as templates for, respectively, the configuration and the hosts files. Rename them removing the `.template` suffix. The obtained files will not be versioned.
+Use provided `deploy/alpha.yml.template` and `deploy/hosts.template` as templates for, respectively, the configuration and the hosts files. Rename them removing the `.template` suffix. The obtained files will not be versioned.
 
 This project contains makefile commands for "alpha". If needed, duplicate those and use them as templates for additional instances (e.g. "beta" or "prod").
 
-Both the remote server and the continuous integration system need `node.js`, in order to automatically build static files. If such module bundler is not necessary, remove unused commands from the Makefile `ci` command and from `deploy/deploy.yaml`.
+Both the remote server and the continuous integration system need `node.js`, in order to automatically build static files. If such module bundler is not necessary, remove unused commands from the Makefile `ci` command and from `deploy/deploy.yml`.
 
 Each instance (e.g. "alpha") should be initialized, executing only **once**:
 
