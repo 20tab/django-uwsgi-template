@@ -16,32 +16,32 @@ ci:
 
 initalpha:
 	( \
-		cd deploy && TARGET=alpha ansible-playbook -vv deploy.yaml; \
+		cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml; \
 	)
 
 alpha:
 	( \
-		cd deploy && TARGET=alpha ansible-playbook -vv deploy.yaml --skip-tags "init"; \
+		cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "init"; \
 	)
 
 initbeta:
 	( \
-		cd deploy && TARGET=beta ansible-playbook -vv deploy.yaml; \
+		cd deploy && TARGET=beta ansible-playbook -vv deploy.yml; \
 	)
 
 beta:
 	( \
-		cd deploy && TARGET=beta ansible-playbook -vv deploy.yaml --skip-tags "init"; \
+		cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "init"; \
 	)
 
 initproduction:
 	( \
-		cd deploy && TARGET=production ansible-playbook -vv deploy.yaml; \
+		cd deploy && TARGET=production ansible-playbook -vv deploy.yml; \
 	)
 
 production:
 	( \
-		cd deploy && TARGET=production ansible-playbook -vv deploy.yaml --skip-tags "init"; \
+		cd deploy && TARGET=production ansible-playbook -vv deploy.yml --skip-tags "init"; \
 	)
 
 test:
