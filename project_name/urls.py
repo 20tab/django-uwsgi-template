@@ -19,8 +19,8 @@ from django.urls import include, path
 from django.views.debug import default_urlconf
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', default_urlconf),  # TODO: Change this row to return your homepage
+    path("admin/", admin.site.urls),
+    path("", default_urlconf),  # TODO: Change this row to return your homepage
 ]
 
 try:
@@ -28,4 +28,6 @@ try:
 except ModuleNotFoundError:  # pragma: no cover
     pass
 else:
-    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))  # pragma: no cover
+    urlpatterns.append(
+        path("__debug__/", include(debug_toolbar.urls))
+    )  # pragma: no cover

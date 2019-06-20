@@ -18,7 +18,7 @@ indent_style = space
 # 4 space indentation
 [*.py]
 indent_size = 4
-max_line_length = 119
+max_line_length = 88
 
 [*.md]
 indent_size = 4
