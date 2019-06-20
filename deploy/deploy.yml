@@ -7,10 +7,10 @@
 
   tasks:
     - name: Force virtualenv creation
-      command: virtualenv -p python3.6 ${HOME}/venvs/{{project_venv_name}} creates="${HOME}/venvs/{{project_venv_name}}"
+      command: virtualenv -p python3.6 ${HOME}/venvs/{% verbatim %}{{project_venv_name}} creates="${HOME}/venvs/{{project_venv_name}}{% endverbatim %}"
       tags: init
     - name: Clone repository
-      git:
+      git:{% verbatim %}
         repo={{git_repository}}
         dest=www/{{project_dir_name}}
         accept_hostkey=yes
@@ -37,8 +37,8 @@
     - name: Copy env file
       tags: init
       copy:
-        src: ${HOME}/www/{{project_dir_name}}/{% verbatim %}{{project_name}}{% endverbatim %}/.env.template
-        dest: ${HOME}/www/{{project_dir_name}}/{% verbatim %}{{project_name}}{% endverbatim %}/.env
+        src: ${HOME}/www/{{project_dir_name}}/{{project_name}}/.env.template
+        dest: ${HOME}/www/{{project_dir_name}}/{{project_name}}/.env
         mode: 0600
         remote_src: yes
     - name: Generate secret key
@@ -47,16 +47,16 @@
       register: secretkey
     - name: Write env vars
       tags: init
-      command: sed -i'.bak' -e "s/secretkey/{{ secretkey.stdout }}/g;s/username/{{db_user}}/g;s/password/{{db_password}}/g;s/database/{{db_name}}/g;" ${HOME}/www/{{project_dir_name}}/{% verbatim %}{{project_name}}{% endverbatim %}/.env
+      command: sed -i'.bak' -e "s/secretkey/{{ secretkey.stdout }}/g;s/username/{{db_user}}/g;s/password/{{db_password}}/g;s/database/{{db_name}}/g;" ${HOME}/www/{{project_dir_name}}/{{project_name}}/.env
     - name: Migrate database
-      command: "${HOME}/venvs/{{project_venv_name}}/bin/python manage.py migrate --settings={% verbatim %}{{project_name}}{% endverbatim %}.settings --configuration={{configuration}}"
+      command: "${HOME}/venvs/{{project_venv_name}}/bin/python manage.py migrate{% endverbatim %} --settings={{project_name}}.settings{% verbatim %} --configuration={{configuration}}"
       args:
         chdir: ${HOME}/www/{{project_dir_name}}/
     - name: Collects the static files
-      command: "${HOME}/venvs/{{project_venv_name}}/bin/python manage.py collectstatic --clear --noinput --settings={% verbatim %}{{project_name}}{% endverbatim %}.settings --configuration={{configuration}}"
+      command: "${HOME}/venvs/{{project_venv_name}}/bin/python manage.py collectstatic --clear --noinput --settings={{project_name}}.settings --configuration={{configuration}}"
       args:
         chdir: ${HOME}/www/{{project_dir_name}}/
     - name: Restart vassal
       file:
         path: "${HOME}/www/{{project_dir_name}}/uwsgiconf/remote/{{vassal}}.ini"
-        state: touch
+        state: touch{% endverbatim %}
