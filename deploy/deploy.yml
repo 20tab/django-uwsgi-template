@@ -49,7 +49,7 @@
       tags: init
       command: sed -i'.bak' -e "s/secretkey/{{ secretkey.stdout }}/g;s/username/{{db_user}}/g;s/password/{{db_password}}/g;s/database/{{db_name}}/g;" ${HOME}/www/{{project_dir_name}}/{{project_name}}/.env
     - name: Migrate database
-      command: "${HOME}/venvs/{{project_venv_name}}/bin/python manage.py migrate{% endverbatim %} --settings={{project_name}}.settings{% verbatim %} --configuration={{configuration}}"
+      command: "${HOME}/venvs/{{project_venv_name}}/bin/python manage.py migrate --settings={{project_name}}.settings --configuration={{configuration}}"
       args:
         chdir: ${HOME}/www/{{project_dir_name}}/
     - name: Collects the static files
