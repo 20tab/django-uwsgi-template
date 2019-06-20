@@ -1,4 +1,5 @@
-settings: beta
+vassal: beta
+configuration: Beta
 project_name: {{project_name}}
 project_dir_name: {{project_name}}_beta
 project_venv_name: {{project_name}}_beta
