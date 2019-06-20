@@ -1,6 +1,8 @@
 # <!-- {% comment %} -->Django uWSGI template
 <!-- {% endcomment %}--> {{project_name}}
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+
 This is a [Django](https://docs.djangoproject.com) project <!-- {% comment %} -->template<!-- {% endcomment %}--> using [uWSGI](https://uwsgi-docs.readthedocs.io) as application server.
 
 > **NOTE**: for OSX check [uwsgi-emperor-mode](https://github.com/20tab/uwsgi-emperor-mode) to configure your own local server with emperor.

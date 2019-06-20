@@ -40,78 +40,78 @@ class DjangoDefault(Configuration):
     # Application definition
 
     INSTALLED_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
     ]
 
     MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        "django.middleware.security.SecurityMiddleware",
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.middleware.common.CommonMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+        "django.middleware.clickjacking.XFrameOptionsMiddleware",
     ]
 
-    ROOT_URLCONF = '{{project_name}}.urls'
+    ROOT_URLCONF = "{{project_name}}.urls"
 
     TEMPLATES = [
         {
-            'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [],
-            'APP_DIRS': True,
-            'OPTIONS': {
-                'context_processors': [
-                    'django.template.context_processors.debug',
-                    'django.template.context_processors.request',
-                    'django.contrib.auth.context_processors.auth',
-                    'django.contrib.messages.context_processors.messages',
-                ],
+            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "DIRS": [],
+            "APP_DIRS": True,
+            "OPTIONS": {
+                "context_processors": [
+                    "django.template.context_processors.debug",
+                    "django.template.context_processors.request",
+                    "django.contrib.auth.context_processors.auth",
+                    "django.contrib.messages.context_processors.messages",
+                ]
             },
-        },
+        }
     ]
 
-    WSGI_APPLICATION = '{{project_name}}.wsgi.application'
+    WSGI_APPLICATION = "{{project_name}}.wsgi.application"
 
     # Database
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#databases
 
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
 
     # Password validation
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#auth-password-validators
-
+    # fmt: off
     AUTH_PASSWORD_VALIDATORS = [
         {
-            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
         },
         {
-            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
         },
         {
-            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
         },
         {
-            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+            "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
         },
     ]
-
+    # fmt: on
     # Internationalization
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/i18n/
 
-    LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = "en-us"
 
-    TIME_ZONE = 'UTC'
+    TIME_ZONE = "UTC"
 
     USE_I18N = True
 
@@ -122,7 +122,7 @@ class DjangoDefault(Configuration):
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/{{docs_version}}/howto/static-files/
 
-    STATIC_URL = '/static/'
+    STATIC_URL = "/static/"
 
 
 class ProjectDefault(DjangoDefault):
@@ -131,56 +131,58 @@ class ProjectDefault(DjangoDefault):
     # Application definition
 
     INSTALLED_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
-        'rest_framework',
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
+        "rest_framework",
     ]
 
     # Database URL
-    # https://django-configurations.readthedocs.io/en/latest/values/#configurations.values.DatabaseURLValue
+    # https://django-configurations.readthedocs.io/en/stable/values/
 
     DATABASES = values.DatabaseURLValue()
 
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/{{docs_version}}/howto/static-files/
 
-    STATIC_ROOT = os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, 'static'))
+    STATIC_ROOT = os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, "static"))
 
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+    STATICFILES_STORAGE = (
+        "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+    )
 
     # Stored files
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/files/
 
-    MEDIA_URL = '/media/'
+    MEDIA_URL = "/media/"
 
-    MEDIA_ROOT = os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, 'media'))
+    MEDIA_ROOT = os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, "media"))
 
     # Site
 
-    DEFAULT_NAME = '{{project_name}}'
+    DEFAULT_NAME = "{{project_name}}"
 
-    BASE_HOST_URL = '{{project_name}}.com'
+    BASE_HOST_URL = "{{project_name}}.com"
 
-    BASE_URL = f'www.{BASE_HOST_URL}'
+    BASE_URL = f"www.{BASE_HOST_URL}"
 
-    BASE_DOMAIN_URL = f'https://{BASE_URL}'
+    BASE_DOMAIN_URL = f"https://{BASE_URL}"
 
     # Email Settings
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/email/
 
-    SERVER_EMAIL = f'info@{BASE_HOST_URL}'
+    SERVER_EMAIL = f"info@{BASE_HOST_URL}"
 
-    DEFAULT_FROM_EMAIL = f'{DEFAULT_NAME} <{SERVER_EMAIL}>'
+    DEFAULT_FROM_EMAIL = f"{DEFAULT_NAME} <{SERVER_EMAIL}>"
 
-    EMAIL_SUBJECT_PREFIX = f'[{DEFAULT_NAME}] '
+    EMAIL_SUBJECT_PREFIX = f"[{DEFAULT_NAME}] "
 
-    ERROR_EMAIL = f'errors@{BASE_HOST_URL}'
+    ERROR_EMAIL = f"errors@{BASE_HOST_URL}"
 
-    EMAIL_SIGNATURE = f'\n-- \n{DEFAULT_FROM_EMAIL}'
+    EMAIL_SIGNATURE = f"\n-- \n{DEFAULT_FROM_EMAIL}"
 
     MANAGERS = ((DEFAULT_NAME, ERROR_EMAIL),)
 
@@ -191,27 +193,24 @@ class ProjectDefault(DjangoDefault):
     # Translation
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/i18n/translation/
 
-    # LANGUAGES = (
-    #     ('en', 'English'),
-    #     ('it', 'Italiano'),
-    # )
+    # LANGUAGES = (("en", "English"), ("it", "Italiano"))
 
-    # LOCALE_PATHS = (os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, 'locale')),)
+    # LOCALE_PATHS = (os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, "locale")),)
 
     # Authentication
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/auth/customizing/
 
-    # AUTH_USER_MODEL = 'users.User'
+    # AUTH_USER_MODEL = "users.User"
 
-    # LOGIN_URL = 'login'
+    # LOGIN_URL = "login"
 
-    # LOGOUT_URL = 'logout'
+    # LOGOUT_URL = "logout"
 
-    # LOGIN_ERROR_URL = 'home'
+    # LOGIN_ERROR_URL = "home"
 
-    # LOGIN_REDIRECT_URL = 'home'
+    # LOGIN_REDIRECT_URL = "home"
 
-    # LOGOUT_REDIRECT_URL = 'home'
+    # LOGOUT_REDIRECT_URL = "home"
 
     # Django REST Framework
     # https://www.django-rest-framework.org/api-guide/settings/
@@ -225,11 +224,11 @@ class Local(ProjectDefault):
     # Security
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
-    BASE_URL = '{{project_name}}.local'
+    BASE_URL = "{{project_name}}.local"
 
-    BASE_DOMAIN_URL = f'http://{BASE_URL}'
+    BASE_DOMAIN_URL = f"http://{BASE_URL}"
 
-    ALLOWED_HOSTS = (BASE_URL, '127.0.0.1', 'localhost')
+    ALLOWED_HOSTS = (BASE_URL, "127.0.0.1", "localhost")
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -237,21 +236,23 @@ class Local(ProjectDefault):
     DEBUG = True
 
     # Email URL
-    # https://django-configurations.readthedocs.io/en/latest/values/#configurations.values.EmailURLValue
+    # https://django-configurations.readthedocs.io/en/stable/values/
 
-    EMAIL = values.EmailURLValue('console://')
+    EMAIL = values.EmailURLValue("console://")
 
     # Django Debug Toolbar
-    # https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html
+    # https://django-debug-toolbar.readthedocs.io/en/stable/configuration.html
 
     try:
         import debug_toolbar  # noqa
     except ModuleNotFoundError:
         pass
     else:
-        INTERNAL_IPS = ['127.0.0.1', 'localhost']
-        ProjectDefault.INSTALLED_APPS.append('debug_toolbar')
-        ProjectDefault.MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+        INTERNAL_IPS = ["127.0.0.1", "localhost"]
+        ProjectDefault.INSTALLED_APPS.append("debug_toolbar")
+        ProjectDefault.MIDDLEWARE.append(
+            "debug_toolbar.middleware.DebugToolbarMiddleware"
+        )
 
 
 class Alpha(ProjectDefault):
@@ -260,9 +261,9 @@ class Alpha(ProjectDefault):
     # Security
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
-    BASE_URL = f'alpha.{ProjectDefault.BASE_HOST_URL}'
+    BASE_URL = f"alpha.{ProjectDefault.BASE_HOST_URL}"
 
-    BASE_DOMAIN_URL = f'http://{BASE_URL}'
+    BASE_DOMAIN_URL = f"http://{BASE_URL}"
 
     ALLOWED_HOSTS = (BASE_URL,)
 
@@ -272,9 +273,9 @@ class Alpha(ProjectDefault):
     DEBUG = True
 
     # Email URL
-    # https://django-configurations.readthedocs.io/en/latest/values/#configurations.values.EmailURLValue
+    # https://django-configurations.readthedocs.io/en/stable/values/
 
-    EMAIL = values.EmailURLValue('console://')
+    EMAIL = values.EmailURLValue("console://")
 
 
 class Beta(ProjectDefault):
@@ -283,9 +284,9 @@ class Beta(ProjectDefault):
     # Security
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
 
-    BASE_URL = f'beta.{ProjectDefault.BASE_HOST_URL}'
+    BASE_URL = f"beta.{ProjectDefault.BASE_HOST_URL}"
 
-    BASE_DOMAIN_URL = f'http://{BASE_URL}'
+    BASE_DOMAIN_URL = f"http://{BASE_URL}"
 
     ALLOWED_HOSTS = (BASE_URL,)
 
@@ -295,9 +296,9 @@ class Beta(ProjectDefault):
     DEBUG = False
 
     # Email URL
-    # https://django-configurations.readthedocs.io/en/latest/values/#configurations.values.EmailURLValue
+    # https://django-configurations.readthedocs.io/en/stable/values/
 
-    EMAIL = values.EmailURLValue('console://')
+    EMAIL = values.EmailURLValue("console://")
 
 
 class Production(ProjectDefault):
@@ -314,7 +315,7 @@ class Production(ProjectDefault):
     DEBUG = False
 
     # Email URL
-    # https://django-configurations.readthedocs.io/en/latest/values/#configurations.values.EmailURLValue
+    # https://django-configurations.readthedocs.io/en/stable/values/
 
     EMAIL = values.EmailURLValue()
 
@@ -325,7 +326,7 @@ class Production(ProjectDefault):
 
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
-    X_FRAME_OPTIONS = 'DENY'  # Default: 'SAMEORIGIN'
+    X_FRAME_OPTIONS = "DENY"  # Default: 'SAMEORIGIN'
 
     # CSRF_COOKIE_SECURE = True
 
@@ -360,9 +361,9 @@ class Testing(ProjectDefault):
     DEBUG = False
 
     # Email URL
-    # https://django-configurations.readthedocs.io/en/latest/values/#configurations.values.EmailURLValue
+    # https://django-configurations.readthedocs.io/en/stable/values/
 
-    EMAIL = values.EmailURLValue('dummy://')
+    EMAIL = values.EmailURLValue("dummy://")
 
     # Django REST Framework
     # https://www.django-rest-framework.org/api-guide/settings/

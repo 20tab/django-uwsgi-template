@@ -9,8 +9,8 @@ from dotenv import find_dotenv, load_dotenv
 def main():
     """Run Django process."""
     load_dotenv(find_dotenv())
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', '{{project_name}}.settings')
-    os.environ.setdefault('DJANGO_CONFIGURATION', 'Local')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{project_name}}.settings")
+    os.environ.setdefault("DJANGO_CONFIGURATION", "Local")
     try:
         from configurations.management import execute_from_command_line
     except ImportError as exc:
@@ -22,5 +22,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
