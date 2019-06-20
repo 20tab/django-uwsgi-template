@@ -12,12 +12,8 @@ before_script:
 
 test:
   variables:
-    DATABASE_DEFAULT_HOST: "postgres"
-    DATABASE_DEFAULT_NAME: "{{project_name}}"
-    DATABASE_DEFAULT_PASSWORD: "postgres"
-    DATABASE_DEFAULT_PORT: 5432
-    DATABASE_DEFAULT_USER: "postgres"
-    SECRET_KEY: "{{secret_key}}"
+    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/{{project_name}}"
+    DJANGO_SECRET_KEY: "{{secret_key}}"
   script:
     - make gitlabci
   coverage: '/^TOTAL.*\s+(\d+\%)$/'

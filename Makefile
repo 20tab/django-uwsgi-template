@@ -1,19 +1,17 @@
-export SETTINGS={{project_name}}.settings.testing
-
 jenkinsci:
 	( \
 		virtualenv --python=python3.6 ${JENKINSBUILD_DIR}/{{project_name}}; \
 		source ${JENKINSBUILD_DIR}/{{project_name}}/bin/activate; \
 		pip install -r requirements/tests.txt; \
 		flake8; \
-		coverage run manage.py test --settings=${SETTINGS} --noinput; \
+		coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput; \
 		coverage xml; \
 	)
 
 gitlabci:
 	( \
 		flake8; \
-		coverage run manage.py test --settings=${SETTINGS} --noinput; \
+		coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput; \
 		coverage report -m; \
 	)
 
@@ -49,7 +47,7 @@ production:
 
 test:
 	( \
-		coverage run manage.py test --settings=${SETTINGS} --noinput; \
+		coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput; \
 		coverage html; \
 	)
 

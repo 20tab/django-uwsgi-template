@@ -1,4 +1,5 @@
-settings: production
+vassal: production
+configuration: Production
 project_name: {{project_name}}
 project_dir_name: {{project_name}}
 project_venv_name: {{project_name}}
