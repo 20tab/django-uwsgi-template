@@ -1,19 +1,38 @@
 image: python:latest
 
-services:
-  - postgres:latest
+stages:
+- test
+- deploy
 
 cache:
   paths:
     - ~/.cache/pip/
 
-before_script:
-  - pip install -r requirements/tests.txt
-
-test:
+coverage:
+  stage: test
+  services:
+    - postgres:latest
+  before_script:
+    - pip install -r requirements/tests.txt
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/{{project_name}}"
     DJANGO_SECRET_KEY: "{{secret_key}}"
   script:
     - make gitlabci
   coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - htmlcov/
+    expire_in: 1 day
+
+pages:
+  stage: deploy
+  before_script:
+      - "true"
+  dependencies:
+    - coverage
+  script:
+    - mv htmlcov/ public/
+  artifacts:
+    paths:
+      - public
