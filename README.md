@@ -190,15 +190,21 @@ To collect static files, execute:
 
 ## Continuous Integration
 
-Use the following command as a shortcut to configure a continuous integration (e.g. Jenkins) build:
+Depending on the CI tool, you might need to configure Django environment variables.
+
+### Jenkins
+
+Use the following command as a shortcut to configure the continuous integration.
 
 ```shell
-export DATABASE_DEFAULT_NAME=<database_name>
-export DATABASE_DEFAULT_PASSWORD=<database_user_password>
-export DATABASE_DEFAULT_USER=<database_user_name>
-export SECRETKEY=<django_secret_key>
-make ci
+export DATABASE_URL=postgres://<database_user_name>:<database_user_password>@127.0.0.1:5432/<database_name>
+export DJANGO_SECRET_KEY=<django_secret_key>
+make jenkinsci
 ```
+
+### Gitlab CI
+
+The configuration file `.gitlab-ci.yml` should work as is, needing no further customization.
 
 ## Deploy
 
