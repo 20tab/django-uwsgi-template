@@ -89,11 +89,11 @@ class DjangoDefault(Configuration):
     }
 
     # Password validation
-    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#auth-password-validators
+    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#auth-password-validators  # noqa
     # fmt: off
     AUTH_PASSWORD_VALIDATORS = [
         {
-            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
         },
         {
             "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -222,7 +222,7 @@ class Local(ProjectDefault):
     """The local settings."""
 
     # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
+    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
     BASE_URL = "{{project_name}}.local"
 
@@ -259,7 +259,7 @@ class Alpha(ProjectDefault):
     """The alpha settings."""
 
     # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
+    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
     BASE_URL = f"alpha.{ProjectDefault.BASE_HOST_URL}"
 
@@ -282,7 +282,7 @@ class Beta(ProjectDefault):
     """The beta settings."""
 
     # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
+    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
     BASE_URL = f"beta.{ProjectDefault.BASE_HOST_URL}"
 
@@ -305,7 +305,7 @@ class Production(ProjectDefault):
     """The production settings."""
 
     # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
+    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
     ALLOWED_HOSTS = (ProjectDefault.BASE_URL,)
 
@@ -351,7 +351,7 @@ class Testing(ProjectDefault):
     """The testing settings."""
 
     # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/topics/security/#host-header-validation
+    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
     ALLOWED_HOSTS = (ProjectDefault.BASE_URL,)
 
