@@ -245,9 +245,9 @@ class Local(ProjectDefault):
 
     try:
         import debug_toolbar  # noqa
-    except ModuleNotFoundError:
+    except ModuleNotFoundError:  # pragma: no cover
         pass
-    else:
+    else:  # pragma: no cover
         INTERNAL_IPS = ["127.0.0.1", "localhost"]
         ProjectDefault.INSTALLED_APPS.append("debug_toolbar")
         ProjectDefault.MIDDLEWARE.append(
