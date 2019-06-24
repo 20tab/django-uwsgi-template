@@ -70,5 +70,5 @@ pip:
 
 collectstatic:
 	( \
-		python manage.py collectstatic --clear --noinput; \
+		python manage.py collectstatic --settings={{project_name}}.settings --configuration=Local --clear --noinput; \
 	)

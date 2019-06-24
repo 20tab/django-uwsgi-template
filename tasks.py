@@ -108,13 +108,14 @@ def init(c):
         )
     )
     createdb(c)
+    c.run("make collectstatic")
     print("*** Next steps ***")
     print(f"a) Check the uwsgiconf/local/{USERNAME}.ini and verify the python plugin")
     print("b) Check the uwsgiconf/remote/globlal.ini file and verify the python plugin")
-    print("c) Check the uwsgiconf/remote/alpha.ini file and verify the domain name")
+    print("c) Check the domain in uwsgiconf/remote/[alpha|beta|production].ini file")
     print("d) Configure the deploy/hosts file with server data")
-    print("e) Configure the deploy/alpha.yml file with the correct data")
-    print(f"f) Configure the file by {PROJECT_DIRNAME}/settings/testing.py")
+    print("e) Configure the deploy/[alpha|beta|production].yml files with correct data")
+    print(f"f) Configure the file by {PROJECT_DIRNAME}/settings.py")
     if EMPEROR_MODE:
         c.run(f"python -m webbrowser -t http://{PROJECT_DIRNAME}.local/")
 
@@ -144,8 +145,6 @@ def gitinit(c, git_repository_url):
     """Initialize git repository."""
     c.run(f'sed -i".bak" -e "s,GIT_REPOSITORY_URL,{git_repository_url},g;" README.md')
     c.run("git init")
-    c.run("flake8 --install-hook git")
-    c.run("git config flake8.strict true")
     c.run("git add -A")
     c.run("git commit -m 'Initial commit'")
     c.run(f"git remote add origin {git_repository_url}")
