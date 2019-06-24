@@ -108,8 +108,9 @@ def init(c):
             f" {ENV_FILE}"
         )
     )
-    createdb(c)
+    print("Collect static files")
     c.run("make collectstatic")
+    createdb(c)
     print("*** Next steps ***")
     print(f"a) Check the uwsgiconf/local/{USERNAME}.ini and verify the python plugin")
     print("b) Check the uwsgiconf/remote/globlal.ini file and verify the python plugin")
