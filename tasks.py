@@ -5,6 +5,7 @@ import os
 import sys
 from pathlib import Path
 
+import dj_database_url
 from django.core.management.utils import get_random_secret_key
 from dotenv import find_dotenv, load_dotenv
 from invoke import task
@@ -160,10 +161,12 @@ def restart(c):
 def get_db():
     """Fetch database credentials."""
     load_dotenv(find_dotenv())
-    db_name = os.getenv("DATABASE_DEFAULT_NAME")
-    db_host = os.getenv("DATABASE_DEFAULT_HOST")
-    db_port = os.getenv("DATABASE_DEFAULT_PORT")
-    db_user = os.getenv("DATABASE_DEFAULT_USER")
+    db_url = os.getenv("DATABASE_URL")
+    db_default = dj_database_url.parse(db_url)
+    db_name = db_default["NAME"]
+    db_host = db_default["HOST"]
+    db_port = db_default["PORT"]
+    db_user = db_default["USER"]
     return db_name, db_host, db_port, db_user
 
 
