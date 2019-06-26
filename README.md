@@ -70,7 +70,7 @@ Change directory and start a new project with this template:
 
 ```shell
 ({{project_name}}) $ cd ~/projects/
-({{project_name}}) $ django-admin.py startproject --template https://www.20tab.com/template/ -e cfg,ini,json,md,py,yml,template -n Makefile,.gitignore {{project_name}}
+({{project_name}}) $ django-admin.py startproject --template https://www.20tab.com/template/ -e cfg,ini,json,md,py,yml,template -n Dockerfile,Makefile,.gitignore {{project_name}}
 ```
 
 ### Git initialization
