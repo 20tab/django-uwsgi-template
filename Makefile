@@ -8,14 +8,6 @@ jenkinsci:
 		coverage xml; \
 	)
 
-gitlabci:
-	( \
-		flake8; \
-		coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput; \
-		coverage html; \
-		coverage report -m; \
-	)
-
 initalpha:
 	( \
 		cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml; \
