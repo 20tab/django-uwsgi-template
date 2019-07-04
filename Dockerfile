@@ -16,4 +16,6 @@ RUN pip install --no-cache-dir -r /app/requirements/local.txt
 
 COPY . .
 
-CMD ["make", "dockerstart"]
+CMD python manage.py migrate --noinput && \
+    python manage.py collectstatic --clear --noinput && \
+    uwsgi uwsgiconf/docker.ini

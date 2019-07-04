@@ -73,10 +73,3 @@ collectstatic:
 	( \
 		python manage.py collectstatic --settings={{project_name}}.settings --configuration=Local --clear --noinput; \
 	)
-
-dockerstart:
-	( \
-		python manage.py migrate --settings={{project_name}}.settings --configuration=Local --noinput; \
-		python manage.py collectstatic --settings={{project_name}}.settings --configuration=Local --clear --noinput; \
-		uwsgi uwsgiconf/local/docker.ini; \
-	)

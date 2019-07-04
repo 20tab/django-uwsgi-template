@@ -1,0 +1,6 @@
+.*
+deploy
+Makefile
+task.py
+uwsgiconf/*
+!uwsgiconf/*.ini
