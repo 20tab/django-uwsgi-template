@@ -130,15 +130,7 @@ class ProjectDefault(DjangoDefault):
 
     # Application definition
 
-    INSTALLED_APPS = [
-        "django.contrib.admin",
-        "django.contrib.auth",
-        "django.contrib.contenttypes",
-        "django.contrib.sessions",
-        "django.contrib.messages",
-        "django.contrib.staticfiles",
-        "rest_framework",
-    ]
+    DjangoDefault.INSTALLED_APPS.extend(["rest_framework"])
 
     # Database URL
     # https://django-configurations.readthedocs.io/en/stable/values/
