@@ -8,14 +8,6 @@ jenkinsci:
 		coverage xml; \
 	)
 
-gitlabci:
-	( \
-		flake8; \
-		coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput; \
-		coverage html; \
-		coverage report -m; \
-	)
-
 initalpha:
 	( \
 		cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml; \
@@ -72,11 +64,4 @@ pip:
 collectstatic:
 	( \
 		python manage.py collectstatic --settings={{project_name}}.settings --configuration=Local --clear --noinput; \
-	)
-
-dockerstart:
-	( \
-		python manage.py migrate --settings={{project_name}}.settings --configuration=Local --noinput; \
-		python manage.py collectstatic --settings={{project_name}}.settings --configuration=Local --clear --noinput; \
-		uwsgi uwsgiconf/local/docker.ini; \
 	)
