@@ -18,10 +18,10 @@ coverage:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/{{project_name}}"
     DJANGO_SECRET_KEY: "{{secret_key}}"
   script:
-		- flake8
-		- coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput
-		- coverage html
-		- coverage report -m
+    - flake8
+    - coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput
+    - coverage html
+    - coverage report -m
   coverage: '/^TOTAL.*\s+(\d+\%)$/'
   artifacts:
     paths:
