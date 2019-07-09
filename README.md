@@ -212,6 +212,9 @@ coverage xml
 
 The configuration file `.gitlab-ci.yml` should work as is, needing no further customization.
 
+### Bitbucket pipelines
+
+The configuration file `bitbucket-pipelines.yml` should work as is, needing no further customization.
 
 ## Git pre-commit hooks
 

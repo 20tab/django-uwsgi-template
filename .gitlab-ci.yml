@@ -1,4 +1,4 @@
-image: python:latest
+image: python:3.7
 
 stages:
 - test
@@ -11,15 +11,16 @@ cache:
 coverage:
   stage: test
   services:
-    - postgres:latest
+    - postgres:11
   before_script:
     - pip install -r requirements/tests.txt
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/{{project_name}}"
     DJANGO_SECRET_KEY: "{{secret_key}}"
+    DJANGO_SETTINGS_MODULE: "{{project_name}}.settings"
+    DJANGO_CONFIGURATION: "Testing"
   script:
-    - flake8
-    - coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput
+    - coverage run manage.py test --noinput
     - coverage html
     - coverage report -m
   coverage: '/^TOTAL.*\s+(\d+\%)$/'
