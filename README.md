@@ -197,9 +197,15 @@ Depending on the CI tool, you might need to configure Django environment variabl
 Use the following command as a shortcut to configure the continuous integration.
 
 ```shell
-export DATABASE_URL=postgres://<database_user_name>:<database_user_password>@127.0.0.1:5432/<database_name>
+export DATABASE_URL=postgres://<database_user_name>:<database_user_password>@127.0.0.1:5432/{{project_name}}
 export DJANGO_SECRET_KEY=<django_secret_key>
-make jenkinsci
+export DJANGO_SETTINGS_MODULE={{project_name}}.settings
+export DJANGO_CONFIGURATION=Testing
+virtualenv --python=python3.7 ${JENKINSBUILD_DIR}/{{project_name}}
+source ${JENKINSBUILD_DIR}/{{project_name}}/bin/activate
+pip install -r requirements/tests.txt
+coverage run manage.py test --noinput
+coverage xml
 ```
 
 ### Gitlab CI
