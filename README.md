@@ -206,6 +206,15 @@ make jenkinsci
 
 The configuration file `.gitlab-ci.yml` should work as is, needing no further customization.
 
+
+## Git pre-commit hooks
+
+To install pre-commit into your git hooks run the below command. pre-commit will now run on every commit. Every time you clone a project using pre-commit running pre-commit install should always be the first thing you do.
+
+```shell
+({{project_name}}) $ pre-commit install
+```
+
 ## Deploy
 
 The project is partially configured to use Ansible to deploy the project. For each instance to deploy (e.g. "alpha"), there must be a config file (e.g. `deploy/alpha.yml`) and an item in the hosts file.
