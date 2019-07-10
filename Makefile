@@ -1,12 +1,3 @@
-jenkinsci:
-	( \
-		virtualenv --python=python3.6 ${JENKINSBUILD_DIR}/{{project_name}}; \
-		source ${JENKINSBUILD_DIR}/{{project_name}}/bin/activate; \
-		pip install -r requirements/tests.txt; \
-		flake8; \
-		coverage run manage.py test --settings={{project_name}}.settings --configuration=Testing --noinput; \
-		coverage xml; \
-	)
 
 initalpha:
 	( \
@@ -50,7 +41,6 @@ dev:
 		pip-sync -q requirements/dev.txt; \
 	)
 
-# to pass optional parameters use as: make pip p='-P requests'
 pip:
 	( \
 		pip install -q -U pip pip-tools; \
@@ -63,5 +53,5 @@ pip:
 
 collectstatic:
 	( \
-		python manage.py collectstatic --settings={{project_name}}.settings --configuration=Local --clear --noinput; \
+		python manage.py collectstatic --clear --noinput; \
 	)

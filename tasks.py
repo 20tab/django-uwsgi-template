@@ -111,6 +111,7 @@ def init(c):
     print("Collect static files")
     c.run("make collectstatic")
     createdb(c)
+    c.run("pre-commit install")
     print("*** Next steps ***")
     print(f"a) Check the uwsgiconf/local/{USERNAME}.ini and verify the python plugin")
     print("b) Check the uwsgiconf/remote/globlal.ini file and verify the python plugin")
