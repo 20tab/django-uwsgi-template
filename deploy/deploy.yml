@@ -37,7 +37,7 @@
     - name: Copy env file
       tags: init
       copy:
-        src: ${HOME}/www/{{project_dir_name}}/.env.template
+        src: ${HOME}/www/{{project_dir_name}}/.env.tpl
         dest: ${HOME}/www/{{project_dir_name}}/.env
         mode: 0600
         remote_src: yes

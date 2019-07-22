@@ -74,7 +74,7 @@ def init(c):
     WORKAREA_ROOT = BASE_DIRNAME.replace("/", "\/")  # noqa
     print("Generating uwsgi user file")
     if EMPEROR_MODE and not os.path.exists(f"{vassals}/{PROJECT_DIRNAME}.ini"):
-        c.run(f"cp {ini_dir}/vassal.ini.template {ini_dir}/{USERNAME}.ini")
+        c.run(f"cp {ini_dir}/vassal.ini.tpl {ini_dir}/{USERNAME}.ini")
         c.run(
             (
                 f'sed -i".bak" -e "s/USERNAME/{USERNAME}/g;s/ZEROCONF/{ZEROCONF}/g;'
@@ -87,7 +87,7 @@ def init(c):
             f"{vassals}/{PROJECT_DIRNAME}.ini"
         )
     else:
-        c.run(f"cp {ini_dir}/standalone.ini.template {ini_dir}/{USERNAME}.ini")
+        c.run(f"cp {ini_dir}/standalone.ini.tpl {ini_dir}/{USERNAME}.ini")
     c.run(
         f'sed -i".bak" -e "s/plugin = python3/plugin = {python_plugin}/g;"'
         f" {ini_dir}/{USERNAME}.ini"
@@ -99,7 +99,7 @@ def init(c):
     c.run(f'sed -i".bak" -e "s/VENV_ROOT/{VENV_ROOT}/g;" {ini_dir}/{USERNAME}.ini')
     print("Create env file")
     if not os.path.exists(f"{ENV_FILE}"):
-        c.run(f"cp {ENV_FILE}.template {ENV_FILE}")
+        c.run(f"cp {ENV_FILE}.tpl {ENV_FILE}")
     c.run(
         (
             f'sed -i".bak" -e '
