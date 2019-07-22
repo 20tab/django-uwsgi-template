@@ -8,8 +8,6 @@ RUN apk add --update \
 
 WORKDIR /app
 
-ENV DJANGO_SETTINGS_MODULE {{project_name}}.settings
-
 COPY ./requirements/local.txt /app/requirements/local.txt
 
 RUN pip install --no-cache-dir -r /app/requirements/local.txt

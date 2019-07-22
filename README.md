@@ -70,7 +70,7 @@ Change directory and start a new project with this template:
 
 ```shell
 ({{project_name}}) $ cd ~/projects/
-({{project_name}}) $ django-admin.py startproject --template https://www.20tab.com/template/ -e cfg,ini,json,md,py,yml,template -n Dockerfile,Makefile,.gitignore {{project_name}}
+({{project_name}}) $ django-admin.py startproject --template https://www.20tab.com/template/ -e cfg,ini,md,py,yml,tpl {{project_name}}
 ```
 
 ### Git initialization
@@ -197,15 +197,10 @@ Depending on the CI tool, you might need to configure Django environment variabl
 Use the following command as a shortcut to configure the continuous integration.
 
 ```shell
-export DATABASE_URL=postgres://<database_user_name>:<database_user_password>@127.0.0.1:5432/{{project_name}}
+pip install tox
+export DATABASE_URL=postgres://postgres:postgres@localhost:5432/{{project_name}}
 export DJANGO_SECRET_KEY=<django_secret_key>
-export DJANGO_SETTINGS_MODULE={{project_name}}.settings
-export DJANGO_CONFIGURATION=Testing
-virtualenv --python=python3.7 ${JENKINSBUILD_DIR}/{{project_name}}
-source ${JENKINSBUILD_DIR}/{{project_name}}/bin/activate
-pip install -r requirements/tests.txt
-coverage run manage.py test --noinput
-coverage xml
+tox -e coverage,reportxml
 ```
 
 ### Gitlab CI
@@ -228,7 +223,7 @@ To install pre-commit into your git hooks run the below command. pre-commit will
 
 The project is partially configured to use Ansible to deploy the project. For each instance to deploy (e.g. "alpha"), there must be a config file (e.g. `deploy/alpha.yml`) and an item in the hosts file.
 
-Use provided `deploy/alpha.yml.template` and `deploy/hosts.template` as templates for, respectively, the configuration and the hosts files. Rename them removing the `.template` suffix. The obtained files will not be versioned.
+Use provided `deploy/alpha.yml.tpl` and `deploy/hosts.tpl` as templates for, respectively, the configuration and the hosts files. Rename them removing the `.tpl` suffix. The obtained files will not be versioned.
 
 This project contains makefile commands for "alpha". If needed, duplicate those and use them as templates for additional instances (e.g. "beta" or "prod").
 

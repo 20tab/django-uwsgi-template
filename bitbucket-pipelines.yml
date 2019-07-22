@@ -8,13 +8,10 @@ pipelines:
         services:
           - postgres
         script:
-          - pip install -r requirements/tests.txt
+          - pip install tox
           - export DATABASE_URL=postgres://postgres:postgres@localhost:5432/{{project_name}}
           - export DJANGO_SECRET_KEY={{secret_key}}
-          - export DJANGO_SETTINGS_MODULE={{project_name}}.settings
-          - export DJANGO_CONFIGURATION=Testing
-          - coverage run manage.py test --noinput
-          - coverage xml -o test-reports/coverage.xml
+          - tox -e coverage,reportxml
 
 definitions:
   services:
