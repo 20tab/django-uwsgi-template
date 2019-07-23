@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/{{docs_version}}/howto/deployment/wsgi/
 
 import os
 
-from configurations.wsgi import get_wsgi_application
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{project_name}}.settings")
 os.environ.setdefault("DJANGO_CONFIGURATION", "Local")
+
+from configurations.wsgi import get_wsgi_application  # noqa isort:skip
 
 application = get_wsgi_application()
