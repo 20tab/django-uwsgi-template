@@ -14,8 +14,8 @@ for-readline = WORKAREA_ROOT/{{project_name}}/.env
   env = %(_)
 endfor =
 
-ini = %d/global.ini
-ini = %d/static.ini
+ini = %dglobal.ini
+ini = %dstatic.ini
 
 # Not required if uwsgi was installed with pip
 plugin = python3
@@ -24,3 +24,7 @@ http-socket = :8080
 
 processes = 1
 threads = 1
+
+# Reload the app if any py module or this config file change (debug only)
+py-auto-reload = 1
+touch-reload = %p
