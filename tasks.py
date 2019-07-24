@@ -133,6 +133,8 @@ def createdb(c):
         c.run(
             f"createdb -e -h {db_host} -p {db_port} -U {db_user} -O {db_user} {db_name}"
         )
+        if confirm("Attention: you are applying migrations. Do you want to proceed?"):
+            c.run("make migrate")
 
 
 @task

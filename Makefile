@@ -1,6 +1,9 @@
 collectstatic:
 	python manage.py collectstatic --clear --noinput
 
+migrate:
+	python manage.py migrate --noinput
+
 dev:
 	pip install -q pip==19.1.1 pip-tools==3.9.0
 	pip-sync requirements/dev.txt
