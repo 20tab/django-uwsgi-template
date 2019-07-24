@@ -111,7 +111,6 @@ def init(c):
     print("Collect static files")
     c.run("make collectstatic")
     createdb(c)
-    c.run("pre-commit install")
     print("*** Next steps ***")
     print(f"a) Check the uwsgiconf/local/{USERNAME}.ini and verify the python plugin")
     print("b) Check the uwsgiconf/remote/globlal.ini file and verify the python plugin")
@@ -150,6 +149,7 @@ def gitinit(c, git_repository_url):
     """Initialize git repository."""
     c.run(f'sed -i".bak" -e "s,GIT_REPOSITORY_URL,{git_repository_url},g;" README.md')
     c.run("git init")
+    c.run("pre-commit install")
     c.run("git add -A")
     c.run("git commit -m 'Initial commit'")
     c.run(f"git remote add origin {git_repository_url}")
