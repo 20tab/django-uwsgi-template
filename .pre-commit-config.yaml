@@ -18,3 +18,8 @@ repos:
       entry: isort
       language: python
       types: [python]
+    - id: mypy
+      name: mypy
+      entry: mypy
+      language: python
+      types: [python]

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/
 """
 
 import os
+from typing import List
 
 from configurations import Configuration, values
 
@@ -35,7 +36,7 @@ class DjangoDefault(Configuration):
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
 
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS: List[str] = []
 
     # Application definition
 
@@ -207,7 +208,7 @@ class ProjectDefault(DjangoDefault):
     # Django REST Framework
     # https://www.django-rest-framework.org/api-guide/settings/
 
-    REST_FRAMEWORK = {}
+    REST_FRAMEWORK = {}  # type: ignore
 
 
 class Local(ProjectDefault):
@@ -220,7 +221,7 @@ class Local(ProjectDefault):
 
     BASE_DOMAIN_URL = f"http://{BASE_URL}"
 
-    ALLOWED_HOSTS = (BASE_URL, "127.0.0.1", "localhost")
+    ALLOWED_HOSTS = [BASE_URL, "127.0.0.1", "localhost"]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -257,7 +258,7 @@ class Alpha(ProjectDefault):
 
     BASE_DOMAIN_URL = f"http://{BASE_URL}"
 
-    ALLOWED_HOSTS = (BASE_URL,)
+    ALLOWED_HOSTS = [BASE_URL]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -280,7 +281,7 @@ class Beta(ProjectDefault):
 
     BASE_DOMAIN_URL = f"http://{BASE_URL}"
 
-    ALLOWED_HOSTS = (BASE_URL,)
+    ALLOWED_HOSTS = [BASE_URL]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -299,7 +300,7 @@ class Production(ProjectDefault):
     # Security
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
-    ALLOWED_HOSTS = (ProjectDefault.BASE_URL,)
+    ALLOWED_HOSTS = [ProjectDefault.BASE_URL]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -345,7 +346,7 @@ class Testing(ProjectDefault):
     # Security
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
-    ALLOWED_HOSTS = (ProjectDefault.BASE_URL,)
+    ALLOWED_HOSTS = [ProjectDefault.BASE_URL]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -360,4 +361,4 @@ class Testing(ProjectDefault):
     # Django REST Framework
     # https://www.django-rest-framework.org/api-guide/settings/
 
-    REST_FRAMEWORK = {}
+    REST_FRAMEWORK = {}  # type: ignore

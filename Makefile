@@ -1,3 +1,12 @@
+check:
+	black --check .
+	flake8
+	isort --check-only --recursive
+	mypy .
+
+checkcommit:
+	pre-commit run --all-files
+
 collectstatic:
 	python manage.py collectstatic --clear --noinput
 
@@ -5,11 +14,11 @@ migrate:
 	python manage.py migrate --noinput
 
 dev:
-	pip install -q pip==19.1.1 pip-tools==3.9.0
+	pip install -q pip==19.2.1 pip-tools==4.0.0
 	pip-sync requirements/dev.txt
 
 pip:
-	pip install -q pip==19.1.1 pip-tools==3.9.0
+	pip install -q pip==19.2.1 pip-tools==4.0.0
 	pip-compile $(p) requirements/common.ini > requirements/common.txt
 	pip-compile $(p) requirements/dev.ini > requirements/dev.txt
 	pip-compile $(p) requirements/prod.ini > requirements/prod.txt
