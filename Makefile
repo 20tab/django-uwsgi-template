@@ -1,3 +1,12 @@
+check:
+	black --check .
+	flake8
+	isort --check-only --recursive
+	mypy .
+
+checkcommit:
+	pre-commit run --all-files
+
 collectstatic:
 	python manage.py collectstatic --clear --noinput
 
