@@ -28,10 +28,14 @@ This is a [Django](https://docs.djangoproject.com) project <!-- {% comment %} --
     * [Add or Update libraries](#add-or-update-libraries)
         * [List outdated libraries](#list-outdated-libraries)
         * [Edit and Compile requirements files](#edit-and-compile-requirements-files)
-    * [Install libraries](#install-libraries)
+    * [Install libraries for development](#install-libraries-for-development)
 * [Testing](#testing)
-* [Frontend build](#frontend-build)
+* [Static](#static)
 * [Continuous Integration](#continuous-integration)
+    * [Jenkins](#jenkins)
+    * [Gitlab CI](#gitlab-ci)
+    * [Bitbucket pipelines](#bitbucket-pipelines)
+* [Git pre-commit hooks](#git-pre-commit-hooks)
 * [Deploy](#deploy)
 
 ## Conventions
