@@ -26,7 +26,7 @@ pip:
 	pip-compile $(p) requirements/local.ini > requirements/local.txt
 
 test:
-	tox -e coverage,reporthtml
+	tox -e coverage,reporthtml,report
 
 initalpha:
 	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml
