@@ -237,7 +237,7 @@ To install pre-commit into your git hooks run the below command. pre-commit will
 To create a local database (database settings from `.env`):
 
 ```shell
-(pasupi) $ inv createdb
+({{project_name}}) $ inv createdb
 ```
 
 ### Drop
@@ -245,7 +245,7 @@ To create a local database (database settings from `.env`):
 To drop the local database (database settings from `.env`):
 
 ```shell
-(pasupi) $ inv dropdb
+({{project_name}}) $ inv dropdb
 ```
 
 ### Dump
@@ -253,7 +253,7 @@ To drop the local database (database settings from `.env`):
 To dump the local database into `deploy/dump.sql.bz2` (database settings from `.env`):
 
 ```shell
-(pasupi) $ inv dumpdb
+({{project_name}}) $ inv dumpdb
 ```
 
 ## Deploy
@@ -271,7 +271,7 @@ Both the remote server and the continuous integration system need `node.js`, in 
 Each instance (e.g. "alpha") should be initialized, executing only **once**:
 
 ```shell
-(pasupi) $ make initalpha
+({{project_name}}) $ make initalpha
 ```
 
 ### Deploy
@@ -279,7 +279,7 @@ Each instance (e.g. "alpha") should be initialized, executing only **once**:
 To deploy a specific instance (e.g. "alpha"), execute:
 
 ```shell
-(pasupi) $ make alpha
+({{project_name}}) $ make alpha
 ```
 
 ### Restore
@@ -287,5 +287,5 @@ To deploy a specific instance (e.g. "alpha"), execute:
 To restore a local database dump (`deploy/dump.sql.bz2`) and deploy a specific instance (e.g. "alpha"), execute:
 
 ```shell
-(pasupi) $ make restorealpha
+({{project_name}}) $ make restorealpha
 ```
