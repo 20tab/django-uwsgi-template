@@ -145,6 +145,16 @@ def dropdb(c):
 
 
 @task
+def dumpdb(c):
+    """Dump database."""
+    db_name, db_host, db_port, db_user = get_db()
+    c.run(
+        f"pg_dump -h {db_host} -p {db_port} -U {db_user} {db_name} | "
+        "bzip2 -9 > deploy/dump.sql.bz2"
+    )
+
+
+@task
 def gitinit(c, git_repository_url):
     """Initialize git repository."""
     c.run(f'sed -i".bak" -e "s,GIT_REPOSITORY_URL,{git_repository_url},g;" README.md')

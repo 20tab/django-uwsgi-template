@@ -36,7 +36,14 @@ This is a [Django](https://docs.djangoproject.com) project <!-- {% comment %} --
     * [Gitlab CI](#gitlab-ci)
     * [Bitbucket pipelines](#bitbucket-pipelines)
 * [Git pre-commit hooks](#git-pre-commit-hooks)
+* [Database](#database)
+    * [Create](#create)
+    * [Drop](#drop)
+    * [Dump](#dump)
 * [Deploy](#deploy)
+    * [Initialize](#initialize)
+    * [Deploy](#deploy)
+    * [Restore](#restore)
 
 ## Conventions
 
@@ -223,6 +230,32 @@ To install pre-commit into your git hooks run the below command. pre-commit will
 ({{project_name}}) $ pre-commit install
 ```
 
+## Database
+
+### Create
+
+To create a local database (database settings from `.env`):
+
+```shell
+(pasupi) $ inv createdb
+```
+
+### Drop
+
+To drop the local database (database settings from `.env`):
+
+```shell
+(pasupi) $ inv dropdb
+```
+
+### Dump
+
+To dump the local database into `deploy/dump.sql.bz2` (database settings from `.env`):
+
+```shell
+(pasupi) $ inv dumpdb
+```
+
 ## Deploy
 
 The project is partially configured to use Ansible to deploy the project. For each instance to deploy (e.g. "alpha"), there must be a config file (e.g. `deploy/alpha.yml`) and an item in the hosts file.
@@ -233,14 +266,26 @@ This project contains makefile commands for "alpha". If needed, duplicate those 
 
 Both the remote server and the continuous integration system need `node.js`, in order to automatically build static files. If such module bundler is not necessary, remove unused commands from the Makefile `ci` command and from `deploy/deploy.yml`.
 
+### Initialize
+
 Each instance (e.g. "alpha") should be initialized, executing only **once**:
 
 ```shell
-({{project_name}}) $ make initalpha
+(pasupi) $ make initalpha
 ```
+
+### Deploy
 
 To deploy a specific instance (e.g. "alpha"), execute:
 
 ```shell
-({{project_name}}) $ make alpha
+(pasupi) $ make alpha
+```
+
+### Restore
+
+To restore a local database dump (`deploy/dump.sql.bz2`) and deploy a specific instance (e.g. "alpha"), execute:
+
+```shell
+(pasupi) $ make restorealpha
 ```

@@ -29,19 +29,28 @@ test:
 	tox -e coverage,reporthtml,report
 
 initalpha:
-	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml
+	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "restore"
 
 alpha:
+	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "init,database,restore"
+
+restorealpha:
 	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "init"
 
 initbeta:
-	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml
+	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "restore"
 
 beta:
+	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "init,database,restore"
+
+restorebeta:
 	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "init"
 
 initproduction:
-	cd deploy && TARGET=production ansible-playbook -vv deploy.yml
+	cd deploy && TARGET=production ansible-playbook -vv deploy.yml --skip-tags "restore"
 
 production:
+	cd deploy && TARGET=production ansible-playbook -vv deploy.yml --skip-tags "init,database,restore"
+
+restoreproduction:
 	cd deploy && TARGET=production ansible-playbook -vv deploy.yml --skip-tags "init"
