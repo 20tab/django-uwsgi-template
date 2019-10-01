@@ -161,6 +161,7 @@ node_modules/
 deploy/alpha.y*ml
 deploy/beta.y*ml
 deploy/deploy.retry
+deploy/dump.sql.bz2
 deploy/production.y*ml
 deploy/hosts
 

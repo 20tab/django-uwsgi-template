@@ -24,16 +24,40 @@
         src: "${HOME}/www/{{project_dir_name}}/uwsgiconf/remote/{{vassal}}.ini"
         dest: "${HOME}/vassals/{{project_dir_name}}.ini"
         state: link
-    - name: Create database
-      tags: init
+    - name: Remove database
+      tags: restore
       postgresql_db:
-        name={{project_dir_name}}
-        encoding=UTF-8
-        template=template0
-        login_user={{db_user}}
         login_password={{db_password}}
+        login_user={{db_user}}
+        name={{project_dir_name}}
+        state=absent
       vars:
         ansible_python_interpreter: venvs/{{project_venv_name}}/bin/python
+    - name: Create database
+      tags: database
+      postgresql_db:
+        encoding=UTF-8
+        login_password={{db_password}}
+        login_user={{db_user}}
+        name={{project_dir_name}}
+        state=present
+        template=template0
+      vars:
+        ansible_python_interpreter: venvs/{{project_venv_name}}/bin/python
+    - name: Copy database dump file
+      tags: restore
+      copy:
+        src=dump.sql.bz2
+        dest=${HOME}/backup
+    - name: Restore database dump file
+      tags: restore
+      postgresql_db:
+        login_password={{db_password}}
+        login_user={{db_user}}
+        name={{project_dir_name}}
+        state=restore
+        target_opts="-q -o /dev/null"
+        target=${HOME}/backup/dump.sql.bz2
     - name: Copy env file
       tags: init
       copy:
