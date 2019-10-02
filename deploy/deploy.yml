@@ -6,9 +6,6 @@
       - ${TARGET}.yml
 
   tasks:
-    - name: Force virtualenv creation
-      command: virtualenv -p python3.6 ${HOME}/venvs/{% verbatim %}{{project_venv_name}} creates="${HOME}/venvs/{{project_venv_name}}{% endverbatim %}"
-      tags: init
     - name: Clone repository
       git:{% verbatim %}
         repo={{git_repository}}
@@ -19,11 +16,17 @@
       pip:
         requirements=${HOME}/www/{{project_dir_name}}/requirements/prod.txt
         virtualenv=${HOME}/venvs/{{project_venv_name}}
+        virtualenv_python=python3
     - name: Create vassal
       file:
         src: "${HOME}/www/{{project_dir_name}}/uwsgiconf/remote/{{vassal}}.ini"
         dest: "${HOME}/vassals/{{project_dir_name}}.ini"
         state: link
+    - name: Copy database dump file
+      tags: restore
+      copy:
+        src=dump.sql.bz2
+        dest=${HOME}/backup
     - name: Remove database
       tags: restore
       postgresql_db:
@@ -44,11 +47,6 @@
         template=template0
       vars:
         ansible_python_interpreter: venvs/{{project_venv_name}}/bin/python
-    - name: Copy database dump file
-      tags: restore
-      copy:
-        src=dump.sql.bz2
-        dest=${HOME}/backup
     - name: Restore database dump file
       tags: restore
       postgresql_db:
@@ -71,7 +69,7 @@
       register: secretkey
     - name: Write env vars
       tags: init
-      command: sed -i'.bak' -e "s/secretkey/{{ secretkey.stdout }}/g;s/username/{{db_user}}/g;s/password/{{db_password}}/g;s/database/{{db_name}}/g;" ${HOME}/www/{{project_dir_name}}/.env
+      command: sed -i'.bak' -e "s/secretkey/{{ secretkey.stdout }}/g;s/username/{{db_user}}/g;s/password/{{db_password}}/g;s/database/{{db_name}}/g;s/Local/{{configuration}}/g;" ${HOME}/www/{{project_dir_name}}/.env
     - name: Migrate database
       command: "${HOME}/venvs/{{project_venv_name}}/bin/python manage.py migrate --settings={{project_name}}.settings --configuration={{configuration}}"
       args:

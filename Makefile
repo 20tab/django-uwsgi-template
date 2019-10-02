@@ -13,6 +13,9 @@ collectstatic:
 migrate:
 	python manage.py migrate --noinput
 
+migrations:
+	python manage.py makemigrations --no-header
+
 dev:
 	pip install -q pip==19.2.3 pip-tools==4.1.0
 	pip-sync requirements/dev.txt
