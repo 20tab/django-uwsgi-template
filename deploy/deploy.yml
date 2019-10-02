@@ -22,6 +22,11 @@
         src: "${HOME}/www/{{project_dir_name}}/uwsgiconf/remote/{{vassal}}.ini"
         dest: "${HOME}/vassals/{{project_dir_name}}.ini"
         state: link
+    - name: Copy database dump file
+      tags: restore
+      copy:
+        src=dump.sql.bz2
+        dest=${HOME}/backup
     - name: Remove database
       tags: restore
       postgresql_db:
@@ -42,11 +47,6 @@
         template=template0
       vars:
         ansible_python_interpreter: venvs/{{project_venv_name}}/bin/python
-    - name: Copy database dump file
-      tags: restore
-      copy:
-        src=dump.sql.bz2
-        dest=${HOME}/backup
     - name: Restore database dump file
       tags: restore
       postgresql_db:
