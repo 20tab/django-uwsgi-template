@@ -17,11 +17,11 @@ migrations:
 	python manage.py makemigrations --no-header
 
 dev:
-	pip install -q pip==19.2.3 pip-tools==4.1.0
+	pip install -q pip~=19.2.3 pip-tools~=4.1.0
 	pip-sync requirements/dev.txt
 
 pip:
-	pip install -q pip==19.2.3 pip-tools==4.1.0
+	pip install -q pip~=19.2.3 pip-tools~=4.1.0
 	pip-compile $(p) requirements/common.ini > requirements/common.txt
 	pip-compile $(p) requirements/dev.ini > requirements/dev.txt
 	pip-compile $(p) requirements/prod.ini > requirements/prod.txt
