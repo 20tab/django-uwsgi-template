@@ -10,7 +10,6 @@ def remove(filepath):
         shutil.rmtree(filepath)
 
 
-
 def remove_dirs():
     use_ansible = "{{cookiecutter.use_ansible}}" == "y"
     use_continuous_delivery_process = "{{cookiecutter.use_continuous_delivery_process}}" == "y"
