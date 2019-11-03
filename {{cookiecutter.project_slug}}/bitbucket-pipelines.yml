@@ -9,8 +9,8 @@ pipelines:
           - postgres
         script:
           - pip install tox
-          - export DATABASE_URL=postgres://postgres:postgres@localhost:5432/{{project_name}}
-          - export DJANGO_SECRET_KEY={{secret_key}}
+          - export DATABASE_URL=postgres://postgres:postgres@localhost:5432/{{cookiecutter.project_slug}}
+          - export DJANGO_SECRET_KEY={{cookiecutter.secret_key}}
           - tox -e coverage,reportxml
 
 definitions:
@@ -18,5 +18,5 @@ definitions:
     postgres:
       image: postgres:11
       variables:
-        POSTGRES_DB: '{{project_name}}'
+        POSTGRES_DB: '{{cookiecutter.project_slug}}'
         POSTGRES_PASSWORD: 'postgres'

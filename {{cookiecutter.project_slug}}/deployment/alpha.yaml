@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpha-{{cookiecutter.project_slug}}-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: alpha-{{cookiecutter.project_slug}}-backend
+  template:
+    metadata:
+      labels:
+        component: alpha-{{cookiecutter.project_slug}}-backend
+    spec:
+      containers:
+        - name: backend
+          image: registry.gitlab.com/{{cookiecutter.project_slug}}/backend:__IMAGE_TAG__
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DJANGO_CONFIGURATION
+              value: Local
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: alpha-{{cookiecutter.project_slug}}-secrets
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: alpha-{{cookiecutter.project_slug}}-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: alpha-{{cookiecutter.project_slug}}-secrets
+                  key: POSTGRES_PASSWORD
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: alpha-{{cookiecutter.project_slug}}-secrets
+                  key: DATABASE_URL
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: alpha-{{cookiecutter.project_slug}}-secrets
+                  key: DJANGO_SECRET_KEY
+      imagePullSecrets:
+        - name: regcred
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: alpha-{{cookiecutter.project_slug}}-backend-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: alpha-{{cookiecutter.project_slug}}-backend
+  ports:
+    - port: 8000
+      targetPort: 8000

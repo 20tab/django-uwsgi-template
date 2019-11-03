@@ -1,0 +1,10 @@
+vassal: alpha
+configuration: Alpha
+project_name: {{cookiecutter.project_slug}}
+project_dir_name: {{cookiecutter.project_slug}}_alpha
+project_venv_name: {{cookiecutter.project_slug}}_alpha
+git_repository: servergit/{{cookiecutter.project_slug}}.git
+db_name: {{cookiecutter.project_slug}}_alpha
+db_user: postgres
+db_password: password
+branch: develop

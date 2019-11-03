@@ -7,7 +7,7 @@
 
   tasks:
     - name: Clone repository
-      git:{% verbatim %}
+      git:{% raw %}
         repo={{git_repository}}
         dest=www/{{project_dir_name}}
         accept_hostkey=yes
@@ -81,4 +81,4 @@
     - name: Restart vassal
       file:
         path: "${HOME}/www/{{project_dir_name}}/uwsgiconf/remote/{{vassal}}.ini"
-        state: touch{% endverbatim %}
+        state: touch{% endraw %}

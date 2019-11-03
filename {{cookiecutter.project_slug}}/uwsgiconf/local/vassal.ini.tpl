@@ -1,7 +1,7 @@
 [uwsgi]
 
-project_name = {{project_name}}
-venv_name = {{project_name}}
+project_name = {{cookiecutter.project_slug}}
+venv_name = {{cookiecutter.project_slug}}
 py_version = PYVERSION
 uid = USERNAME
 gid = USERNAME
@@ -12,12 +12,12 @@ project_root = %(workarea_root)/%(project_name)
 venvs_dir = VENV_ROOT
 
 # Set environment variables
-for-readline = WORKAREA_ROOT/{{project_name}}/.env
+for-readline = WORKAREA_ROOT/{{cookiecutter.project_slug}}/.env
   env = %(_)
 endfor =
 
-ini = WORKAREA_ROOT/{{project_name}}/uwsgiconf/local/global.ini
-ini = WORKAREA_ROOT/{{project_name}}/uwsgiconf/local/static.ini
+ini = WORKAREA_ROOT/{{cookiecutter.project_slug}}/uwsgiconf/local/global.ini
+ini = WORKAREA_ROOT/{{cookiecutter.project_slug}}/uwsgiconf/local/static.ini
 
 # Not required if uwsgi was installed using pip
 plugin = python3

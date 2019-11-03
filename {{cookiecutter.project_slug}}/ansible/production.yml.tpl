@@ -1,0 +1,10 @@
+vassal: production
+configuration: Production
+project_name: {{cookiecutter.project_slug}}
+project_dir_name: {{cookiecutter.project_slug}}
+project_venv_name: {{cookiecutter.project_slug}}
+git_repository: servergit/{{cookiecutter.project_slug}}.git
+db_name: {{cookiecutter.project_slug}}
+db_user: postgres
+db_password: password
+branch: master

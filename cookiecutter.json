@@ -1,0 +1,14 @@
+{
+    "project_name": "django uwsgi project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "use_ansible": "n",
+    "use_continuous_delivery_process": "y",
+    "use_uwsgi_emperor_local": "y",
+    "use_uwsgi_emperor_remote": "n",
+    "use_docker": "y",
+    "django_version": "2.2",
+    "docs_version": "2.2",
+    "use_gitlab": "y",
+    "use_bitbucket": "n",
+    "secret_key": "CHANGE THIS"
+}
