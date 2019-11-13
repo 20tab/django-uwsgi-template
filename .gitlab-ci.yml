@@ -8,7 +8,7 @@ cache:
   paths:
     - ~/.cache/pip/
 
-coverage:
+test:
   stage: test
   services:
     - postgres:11
@@ -25,12 +25,12 @@ coverage:
       - htmlcov/
     expire_in: 1 day
 
-pages:
-  stage: deploy
+coverage:
+  stage: coverage
   before_script:
       - "true"
   dependencies:
-    - coverage
+    - test
   script:
     - mv htmlcov/ public/
   artifacts:
