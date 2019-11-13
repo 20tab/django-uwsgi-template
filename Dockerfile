@@ -1,16 +1,28 @@
-FROM python:3.7-alpine
+FROM python:3.7-slim
 
-RUN apk add --update \
-    build-base \
-    linux-headers \
-    postgresql-dev \
-    && rm -rf /var/cache/apk/*
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        gettext \
+        libpq5 \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
 
-COPY ./requirements/local.txt /app/requirements/local.txt
+ARG REQUIREMENTS=prod
 
-RUN pip install --no-cache-dir -r /app/requirements/local.txt
+COPY ./requirements/${REQUIREMENTS}.txt requirements.txt
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        libpq-dev \
+    && pip3 install --no-cache-dir -r requirements.txt \
+    && apt-get purge -y --auto-remove \
+        build-essential \
+        libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
