@@ -214,6 +214,12 @@ class ProjectDefault(DjangoDefault):
 class Local(ProjectDefault):
     """The local settings."""
 
+    # Application definition
+
+    INSTALLED_APPS = ProjectDefault.INSTALLED_APPS.copy()
+
+    MIDDLEWARE = ProjectDefault.MIDDLEWARE.copy()
+
     # Security
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
 
@@ -242,10 +248,8 @@ class Local(ProjectDefault):
         pass
     else:  # pragma: no cover
         INTERNAL_IPS = ["127.0.0.1", "localhost"]
-        ProjectDefault.INSTALLED_APPS.append("debug_toolbar")
-        ProjectDefault.MIDDLEWARE.append(
-            "debug_toolbar.middleware.DebugToolbarMiddleware"
-        )
+        INSTALLED_APPS.append("debug_toolbar")
+        MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
 
 class Alpha(ProjectDefault):
