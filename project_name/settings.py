@@ -11,12 +11,11 @@ https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/
 """
 
 import os
-from typing import List
 
 from configurations import Configuration, values
 
 
-class DjangoDefault(Configuration):
+class ProjectDefault(Configuration):
     """
     The default settings from the Django project template.
 
@@ -36,7 +35,7 @@ class DjangoDefault(Configuration):
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
 
-    ALLOWED_HOSTS: List[str] = []
+    ALLOWED_HOSTS = values.ListValue([])
 
     # Application definition
 
@@ -82,12 +81,7 @@ class DjangoDefault(Configuration):
     # Database
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#databases
 
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
+    DATABASES = values.DatabaseURLValue()
 
     # Password validation
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#auth-password-validators  # noqa
@@ -125,23 +119,7 @@ class DjangoDefault(Configuration):
 
     STATIC_URL = "/static/"
 
-
-class ProjectDefault(DjangoDefault):
-    """The common settings."""
-
-    # Application definition
-
-    DjangoDefault.INSTALLED_APPS.extend(["rest_framework"])
-
-    # Database URL
-    # https://django-configurations.readthedocs.io/en/stable/values/
-
-    DATABASES = values.DatabaseURLValue()
-
-    # Static files (CSS, JavaScript, Images)
-    # https://docs.djangoproject.com/en/{{docs_version}}/howto/static-files/
-
-    STATIC_ROOT = os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, "static"))
+    STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, "static"))
 
     STATICFILES_STORAGE = (
         "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
@@ -150,30 +128,22 @@ class ProjectDefault(DjangoDefault):
     # Stored files
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/files/
 
-    MEDIA_URL = "/media/"
+    # MEDIA_URL = "/media/"
 
-    MEDIA_ROOT = os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, "media"))
-
-    # Site
-
-    DEFAULT_NAME = "{{project_name}}"
-
-    BASE_HOST_URL = "{{project_name}}.com"
-
-    BASE_URL = f"www.{BASE_HOST_URL}"
-
-    BASE_DOMAIN_URL = f"https://{BASE_URL}"
+    # MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, "media"))
 
     # Email Settings
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/email/
 
-    SERVER_EMAIL = f"info@{BASE_HOST_URL}"
+    SERVER_EMAIL = values.EmailValue()
+
+    DEFAULT_NAME = "{{project_name}}"
 
     DEFAULT_FROM_EMAIL = f"{DEFAULT_NAME} <{SERVER_EMAIL}>"
 
     EMAIL_SUBJECT_PREFIX = f"[{DEFAULT_NAME}] "
 
-    ERROR_EMAIL = f"errors@{BASE_HOST_URL}"
+    ERROR_EMAIL = SERVER_EMAIL
 
     EMAIL_SIGNATURE = f"\n-- \n{DEFAULT_FROM_EMAIL}"
 
@@ -188,46 +158,11 @@ class ProjectDefault(DjangoDefault):
 
     # LANGUAGES = (("en", "English"), ("it", "Italiano"))
 
-    # LOCALE_PATHS = (os.path.abspath(os.path.join(DjangoDefault.BASE_DIR, "locale")),)
-
-    # Authentication
-    # https://docs.djangoproject.com/en/{{docs_version}}/topics/auth/customizing/
-
-    # AUTH_USER_MODEL = "users.User"
-
-    # LOGIN_URL = "login"
-
-    # LOGOUT_URL = "logout"
-
-    # LOGIN_ERROR_URL = "home"
-
-    # LOGIN_REDIRECT_URL = "home"
-
-    # LOGOUT_REDIRECT_URL = "home"
-
-    # Django REST Framework
-    # https://www.django-rest-framework.org/api-guide/settings/
-
-    REST_FRAMEWORK = {}  # type: ignore
+    # LOCALE_PATHS = (os.path.abspath(os.path.join(BASE_DIR, "locale")),)
 
 
 class Local(ProjectDefault):
     """The local settings."""
-
-    # Application definition
-
-    INSTALLED_APPS = ProjectDefault.INSTALLED_APPS.copy()
-
-    MIDDLEWARE = ProjectDefault.MIDDLEWARE.copy()
-
-    # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
-
-    BASE_URL = "{{project_name}}.local"
-
-    BASE_DOMAIN_URL = f"http://{BASE_URL}"
-
-    ALLOWED_HOSTS = [BASE_URL, "127.0.0.1", "localhost"]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -247,22 +182,16 @@ class Local(ProjectDefault):
     except ModuleNotFoundError:  # pragma: no cover
         pass
     else:  # pragma: no cover
-        INTERNAL_IPS = ["127.0.0.1", "localhost"]
-        INSTALLED_APPS.append("debug_toolbar")
-        MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+        INTERNAL_IPS = [*ProjectDefault.ALLOWED_HOSTS]
+        INSTALLED_APPS = [*ProjectDefault.INSTALLED_APPS, "debug_toolbar"]
+        MIDDLEWARE = [
+            *ProjectDefault.MIDDLEWARE,
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
 
 
 class Alpha(ProjectDefault):
     """The alpha settings."""
-
-    # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
-
-    BASE_URL = f"alpha.{ProjectDefault.BASE_HOST_URL}"
-
-    BASE_DOMAIN_URL = f"http://{BASE_URL}"
-
-    ALLOWED_HOSTS = [BASE_URL]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -278,15 +207,6 @@ class Alpha(ProjectDefault):
 class Beta(ProjectDefault):
     """The beta settings."""
 
-    # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
-
-    BASE_URL = f"beta.{ProjectDefault.BASE_HOST_URL}"
-
-    BASE_DOMAIN_URL = f"http://{BASE_URL}"
-
-    ALLOWED_HOSTS = [BASE_URL]
-
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
@@ -300,11 +220,6 @@ class Beta(ProjectDefault):
 
 class Production(ProjectDefault):
     """The production settings."""
-
-    # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
-
-    ALLOWED_HOSTS = [ProjectDefault.BASE_URL]
 
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
@@ -347,11 +262,6 @@ class Production(ProjectDefault):
 class Testing(ProjectDefault):
     """The testing settings."""
 
-    # Security
-    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#allowed-hosts
-
-    ALLOWED_HOSTS = [ProjectDefault.BASE_URL]
-
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
@@ -361,8 +271,3 @@ class Testing(ProjectDefault):
     # https://django-configurations.readthedocs.io/en/stable/values/
 
     EMAIL = values.EmailURLValue("dummy://")
-
-    # Django REST Framework
-    # https://www.django-rest-framework.org/api-guide/settings/
-
-    REST_FRAMEWORK = {}  # type: ignore
