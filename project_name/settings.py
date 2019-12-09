@@ -164,6 +164,12 @@ class ProjectDefault(Configuration):
 class Local(ProjectDefault):
     """The local settings."""
 
+    # Application definition
+
+    INSTALLED_APPS = ProjectDefault.INSTALLED_APPS.copy()
+
+    MIDDLEWARE = ProjectDefault.MIDDLEWARE.copy()
+
     # Debug
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
@@ -182,12 +188,9 @@ class Local(ProjectDefault):
     except ModuleNotFoundError:  # pragma: no cover
         pass
     else:  # pragma: no cover
-        INTERNAL_IPS = [*ProjectDefault.ALLOWED_HOSTS]
-        INSTALLED_APPS = [*ProjectDefault.INSTALLED_APPS, "debug_toolbar"]
-        MIDDLEWARE = [
-            *ProjectDefault.MIDDLEWARE,
-            "debug_toolbar.middleware.DebugToolbarMiddleware",
-        ]
+        INTERNAL_IPS = values.ListValue([], environ_name="ALLOWED_HOSTS")
+        INSTALLED_APPS.append("debug_toolbar")
+        MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
 
 class Alpha(ProjectDefault):
