@@ -16,12 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.views.debug import default_urlconf
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", default_urlconf),  # TODO: Change this row to return your homepage
-]
+urlpatterns = [path("admin/", admin.site.urls)]
 
 try:
     import debug_toolbar
