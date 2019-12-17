@@ -1,3 +1,5 @@
+# Develop
+
 check:
 	black --check .
 	flake8
@@ -10,15 +12,15 @@ checkcommit:
 collectstatic:
 	python manage.py collectstatic --clear --noinput
 
+dev:
+	pip install -q pip~=19.3.1 pip-tools~=4.3.0
+	pip-sync requirements/dev.txt
+
 migrate:
 	python manage.py migrate --noinput
 
 migrations:
 	python manage.py makemigrations --no-header
-
-dev:
-	pip install -q pip~=19.3.1 pip-tools~=4.3.0
-	pip-sync requirements/dev.txt
 
 pip:
 	pip install -q pip~=19.3.1 pip-tools~=4.3.0
@@ -31,29 +33,31 @@ pip:
 test:
 	tox -e coverage,reporthtml,report
 
-initalpha:
-	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "restore"
+# Ansible
 
 alpha:
 	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "init,database,restore"
 
-restorealpha:
-	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "init"
-
-initbeta:
-	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "restore"
-
 beta:
 	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "init,database,restore"
 
-restorebeta:
-	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "init"
+initalpha:
+	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "restore"
+
+initbeta:
+	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "restore"
 
 initproduction:
 	cd deploy && TARGET=production ansible-playbook -vv deploy.yml --skip-tags "restore"
 
 production:
 	cd deploy && TARGET=production ansible-playbook -vv deploy.yml --skip-tags "init,database,restore"
+
+restorealpha:
+	cd deploy && TARGET=alpha ansible-playbook -vv deploy.yml --skip-tags "init"
+
+restorebeta:
+	cd deploy && TARGET=beta ansible-playbook -vv deploy.yml --skip-tags "init"
 
 restoreproduction:
 	cd deploy && TARGET=production ansible-playbook -vv deploy.yml --skip-tags "init"

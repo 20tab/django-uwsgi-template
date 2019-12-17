@@ -33,7 +33,7 @@ class ProjectDefault(Configuration):
     SECRET_KEY = values.SecretValue()
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = True
+    DEBUG = values.BooleanValue(True)
 
     ALLOWED_HOSTS = values.ListValue([])
 
@@ -135,23 +135,22 @@ class ProjectDefault(Configuration):
     # Email Settings
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/email/
 
-    SERVER_EMAIL = values.EmailValue()
+    ADMINS = values.SingleNestedTupleValue(
+        (("{{project_name}}", "errors@{{project_name}}.com"),)
+    )
 
-    DEFAULT_NAME = "{{project_name}}"
+    DEFAULT_FROM_EMAIL = "{{project_name}} <info@{{project_name}}.com>"
 
-    DEFAULT_FROM_EMAIL = f"{DEFAULT_NAME} <{SERVER_EMAIL}>"
-
-    EMAIL_SUBJECT_PREFIX = f"[{DEFAULT_NAME}] "
-
-    ERROR_EMAIL = SERVER_EMAIL
-
-    EMAIL_SIGNATURE = f"\n-- \n{DEFAULT_FROM_EMAIL}"
-
-    MANAGERS = ((DEFAULT_NAME, ERROR_EMAIL),)
-
-    ADMINS = MANAGERS
+    EMAIL_SUBJECT_PREFIX = "[{{project_name}}] "
 
     EMAIL_USE_LOCALTIME = True
+
+    SERVER_EMAIL = values.EmailValue("server@{{project_name}}.com")
+
+    # Email URL
+    # https://django-configurations.readthedocs.io/en/stable/values/
+
+    EMAIL = values.EmailURLValue("console://")
 
     # Translation
     # https://docs.djangoproject.com/en/{{docs_version}}/topics/i18n/translation/
@@ -169,16 +168,6 @@ class Local(ProjectDefault):
     INSTALLED_APPS = ProjectDefault.INSTALLED_APPS.copy()
 
     MIDDLEWARE = ProjectDefault.MIDDLEWARE.copy()
-
-    # Debug
-    # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
-
-    DEBUG = True
-
-    # Email URL
-    # https://django-configurations.readthedocs.io/en/stable/values/
-
-    EMAIL = values.EmailURLValue("console://")
 
     # Django Debug Toolbar
     # https://django-debug-toolbar.readthedocs.io/en/stable/configuration.html
@@ -201,11 +190,6 @@ class Alpha(ProjectDefault):
 
     DEBUG = True
 
-    # Email URL
-    # https://django-configurations.readthedocs.io/en/stable/values/
-
-    EMAIL = values.EmailURLValue("console://")
-
 
 class Beta(ProjectDefault):
     """The beta settings."""
@@ -214,11 +198,6 @@ class Beta(ProjectDefault):
     # https://docs.djangoproject.com/en/{{docs_version}}/ref/settings/#debug
 
     DEBUG = False
-
-    # Email URL
-    # https://django-configurations.readthedocs.io/en/stable/values/
-
-    EMAIL = values.EmailURLValue("console://")
 
 
 class Production(ProjectDefault):
@@ -243,21 +222,8 @@ class Production(ProjectDefault):
 
     X_FRAME_OPTIONS = "DENY"  # Default: 'SAMEORIGIN'
 
-    # CSRF_COOKIE_SECURE = True
-
-    # SECURE_SSL_REDIRECT = True
-
-    # SESSION_COOKIE_SECURE = True
-
-    # SECURE_HSTS_SECONDS = 3600
-
-    # SECURE_HSTS_PRELOAD = True
-
-    # SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-
-    # SECURE_CONTENT_TYPE_NOSNIFF = True
-
-    # SECURE_BROWSER_XSS_FILTER = True
+    # Persistent connections
+    # https://docs.djangoproject.com/en/2.2/ref/databases/#general-notes
 
     # CONN_MAX_AGE = None
 
@@ -273,4 +239,4 @@ class Testing(ProjectDefault):
     # Email URL
     # https://django-configurations.readthedocs.io/en/stable/values/
 
-    EMAIL = values.EmailURLValue("dummy://")
+    EMAIL = values.EmailURLValue("dummy://", environ=False)
