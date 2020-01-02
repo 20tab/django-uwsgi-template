@@ -2,16 +2,11 @@ image: python:3.7
 
 stages:
 - test
-- coverage
-
-cache:
-  paths:
-    - ~/.cache/pip/
 
 test:
   stage: test
   services:
-    - postgres:11
+    - postgres:12
   before_script:
     - pip install tox
   variables:
@@ -20,19 +15,6 @@ test:
   script:
     - tox -e coverage,report,reporthtml
   coverage: '/^TOTAL.*\s+(\d+\%)$/'
-  artifacts:
-    paths:
-      - htmlcov/
-    expire_in: 1 day
-
-coverage:
-  stage: coverage
-  before_script:
-      - "true"
-  dependencies:
-    - test
-  script:
-    - mv htmlcov/ public/
   artifacts:
     paths:
       - public
