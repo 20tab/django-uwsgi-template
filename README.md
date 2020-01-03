@@ -67,7 +67,7 @@ To install and use virtualenv, please, visit [the official documentation](https:
 **Django** and **Invoke** must be installed before initializing the project.
 
 ```shell
-({{project_name}}) $ pip install -U django~=2.2 invoke python-dotenv dj-database-url
+({{project_name}}) $ pip install -U django invoke python-dotenv dj-database-url
 ```
 
 <!-- {% comment %} -->
