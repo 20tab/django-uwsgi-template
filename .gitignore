@@ -133,6 +133,7 @@ dmypy.json
 [._]*.un~
 
 # VisualStudioCode
+.devcontainer/
 .vscode/
 
 # Redis
