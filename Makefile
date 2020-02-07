@@ -7,7 +7,10 @@ check:
 	mypy .
 
 checkcommit:
-	pre-commit run --all-files
+	black .
+	flake8
+	isort --recursive
+	mypy .
 
 collectstatic:
 	python manage.py collectstatic --clear --noinput
