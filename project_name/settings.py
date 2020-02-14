@@ -223,7 +223,7 @@ class Production(ProjectDefault):
     X_FRAME_OPTIONS = "DENY"  # Default: 'SAMEORIGIN'
 
     # Persistent connections
-    # https://docs.djangoproject.com/en/2.2/ref/databases/#general-notes
+    # https://docs.djangoproject.com/en/{{docs_version}}/ref/databases/#general-notes
 
     # CONN_MAX_AGE = None
 
