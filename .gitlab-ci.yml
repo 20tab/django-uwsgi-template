@@ -11,7 +11,7 @@ test:
     - pip install tox
   variables:
     DATABASE_URL: "postgres://postgres:postgres@postgres:5432/{{project_name}}"
-    DJANGO_SECRET_KEY: "{{secret_key}}"
+    DJANGO_SECRET_KEY: "dj4ng0s3cr3tk3y"
   script:
     - tox -e coverage,report,reporthtml
   coverage: '/^TOTAL.*\s+(\d+\%)$/'

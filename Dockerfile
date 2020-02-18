@@ -20,11 +20,13 @@ CMD tox -e coverage,reporthtml,report
 
 FROM base AS dev
 
-ARG REQUIREMENTS=dev
-COPY ./requirements/${REQUIREMENTS}.txt requirements.txt
+COPY ./requirements/dev.txt requirements.txt
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
+        git \
         libpq-dev \
+        make \
+        ssh-client \
     && pip3 install --no-cache-dir -r requirements.txt
 COPY . .
 CMD python manage.py migrate --noinput && \
@@ -34,8 +36,7 @@ CMD python manage.py migrate --noinput && \
 
 FROM base AS prod
 
-ARG REQUIREMENTS=prod
-COPY ./requirements/${REQUIREMENTS}.txt requirements.txt
+COPY ./requirements/prod.txt requirements.txt
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         libpq-dev \
